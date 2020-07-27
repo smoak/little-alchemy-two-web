@@ -1,0 +1,49 @@
+type Query {
+  items: ItemConnection! 
+  node: Node
+  item(name: String!): Item
+}
+
+interface Node {
+   id: ID!
+}
+
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String!
+  endCursor: String!
+}
+
+type ItemConnection {
+  edges: [ItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemEdge {
+  cursor: String!
+  node: Item!
+}
+
+type ItemCombination {
+  source: Item!
+  target: Item!
+}
+
+type ItemCombinationConnection {
+  edges: [ItemCombinationEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemCombinationEdge {
+  cursor: String!
+  node: ItemCombination!
+}
+
+type Item : Node {
+  id: ID!,
+  name: String!
+  myths: Boolean!
+  creates: ItemCombinationConnection!
+  combinations: ItemCombinationConnection!
+}
