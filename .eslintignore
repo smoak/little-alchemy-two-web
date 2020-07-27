@@ -1,0 +1,6 @@
+build/
+coverage/
+node_modules/
+src/registerServiceWorker.ts
+src/**/__tests__/**
+src/serviceWorker.ts
