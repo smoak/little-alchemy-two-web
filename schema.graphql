@@ -2,6 +2,7 @@ type Query {
   items: ItemConnection! 
   node: Node
   item(name: String!): Item
+  search: Search
 }
 
 interface Node {
@@ -46,4 +47,12 @@ type Item : Node {
   myths: Boolean!
   creates: ItemCombinationConnection!
   combinations: ItemCombinationConnection!
+}
+
+type ItemsFilter {
+  withName: String!
+}
+
+type Search {
+ items(filter: ItemsFilter!): ItemConnection
 }

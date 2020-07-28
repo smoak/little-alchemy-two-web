@@ -1,4 +1,4 @@
-import { Box, Grommet, Main } from 'grommet';
+import { Grommet } from 'grommet';
 import React, { FC } from 'react';
 
 import { AppHeader } from './AppHeader';
@@ -7,11 +7,8 @@ import { theme } from './theme';
 
 const App: FC = () => (
   <Grommet theme={theme} full>
-    <Box fill>
-      <AppHeader />
-      <AppMain />
-      <Main pad="large">Main content</Main>
-    </Box>
+    <AppHeader />
+    <AppMain />
   </Grommet>
 );
 
