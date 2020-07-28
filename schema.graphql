@@ -41,8 +41,8 @@ type ItemCombinationEdge {
   node: ItemCombination!
 }
 
-type Item : Node {
-  id: ID!,
+type Item implements Node {
+  id: ID!
   name: String!
   myths: Boolean!
   creates(after: String, first: Int, before: String, last: Int): ItemCombinationConnection!

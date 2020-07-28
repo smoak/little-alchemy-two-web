@@ -1,5 +1,5 @@
 module.exports = {
   src: './src',
-  schema: './data/schema.graphql',
-  exclude: ['**/node_modules/**'],
+  schema: './schema.graphql',
+  exclude: ['**/node_modules/**', '**/__generated__/**'],
 };
