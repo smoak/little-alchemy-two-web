@@ -1,13 +1,13 @@
 import { Box, Main } from 'grommet';
 import React, { FC } from 'react';
 
-import { ItemSearch } from './ItemSearch';
+import { Routes } from './Routes';
 
 export const AppMain: FC = () => {
   return (
     <Box fill align="center" justify="start" pad="large">
       <Main pad="large">
-        <ItemSearch />
+        <Routes />
       </Main>
     </Box>
   );
