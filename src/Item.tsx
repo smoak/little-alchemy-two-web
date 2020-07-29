@@ -1,5 +1,5 @@
+import graphql from 'babel-plugin-relay/macro';
 import React, { FC } from 'react';
-import { graphql } from 'react-relay';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 import { useParams } from 'react-router-dom';
 

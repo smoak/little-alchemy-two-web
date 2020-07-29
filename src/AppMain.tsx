@@ -1,5 +1,5 @@
 import { Box, Main } from 'grommet';
-import React, { FC } from 'react';
+import React, { FC, Suspense } from 'react';
 
 import { Routes } from './Routes';
 
@@ -7,7 +7,9 @@ export const AppMain: FC = () => {
   return (
     <Box fill align="center" justify="start" pad="large">
       <Main pad="large">
-        <Routes />
+        <Suspense fallback={'Loading...'}>
+          <Routes />
+        </Suspense>
       </Main>
     </Box>
   );
