@@ -1,6 +1,6 @@
 import graphql from 'babel-plugin-relay/macro';
-import { List, Box } from 'grommet';
-import React, { FC } from 'react';
+import { Box, Button, List } from 'grommet';
+import React, { FC, useCallback } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
@@ -36,10 +36,13 @@ function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
 }
 
 export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
-  const { data } = usePaginationFragment<ItemCombinationListPaginationQuery, ItemCombinationListComponent_item$key>(
-    fragment,
-    item
-  );
+  const { data, loadNext, hasNext } = usePaginationFragment<
+    ItemCombinationListPaginationQuery,
+    ItemCombinationListComponent_item$key
+  >(fragment, item);
+  const onLoadNextClicked = useCallback(() => {
+    loadNext(3);
+  }, [loadNext]);
 
   const edges = data.combinations.edges;
 
@@ -49,9 +52,14 @@ export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
 
   const listData = edges.filter(notEmpty).map((e) => ({ source: e.node.source.name, target: e.node.target.name }));
 
+  const loadNextButton = hasNext ? <Button secondary label="Load More" onClick={onLoadNextClicked} /> : null;
+
   return (
     <Box pad="small">
       <List primaryKey="source" secondaryKey="target" data={listData} />
+      <Box gap="xxsmall" pad="xxsmall">
+        {loadNextButton}
+      </Box>
     </Box>
   );
 };
