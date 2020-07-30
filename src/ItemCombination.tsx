@@ -1,6 +1,7 @@
-import { Anchor, Box, Text } from 'grommet';
+import { Box, Text } from 'grommet';
 import React, { FC } from 'react';
 
+import { ItemLink } from './ItemLink/ItemLink';
 import { Item } from './ItemList';
 
 interface ItemCombinationProps {
@@ -10,23 +11,18 @@ interface ItemCombinationProps {
     readonly active: boolean;
   };
 }
-export const ItemCombination: FC<ItemCombinationProps> = ({ item }) => {
-  const sourceHref = `/item/${item.source}`;
-  const targetHref = `/item/${item.target}`;
-
-  return (
-    <Box direction="row">
-      <Anchor href={sourceHref}>
-        <Text key="p" weight="bold" margin="small">
-          {item.source}
-        </Text>
-      </Anchor>
-      <Text>+</Text>
-      <Anchor href={targetHref}>
-        <Text key="s" margin="small">
-          {item.target}
-        </Text>
-      </Anchor>
-    </Box>
-  );
-};
+export const ItemCombination: FC<ItemCombinationProps> = ({ item }) => (
+  <Box direction="row">
+    <ItemLink itemName={item.source}>
+      <Text key="p" weight="bold" margin="small">
+        {item.source}
+      </Text>
+    </ItemLink>
+    <Text>+</Text>
+    <ItemLink itemName={item.target}>
+      <Text key="s" margin="small">
+        {item.target}
+      </Text>
+    </ItemLink>
+  </Box>
+);

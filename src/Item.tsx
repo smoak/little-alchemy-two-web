@@ -39,7 +39,7 @@ export const Item: FC = () => {
       </Box>
       <Grid columns={{ count: 2, size: 'auto' }} gap="small">
         <Box background="light-2" align="center">
-          <Heading level="4">Create By</Heading>
+          <Heading level="4">Create By Combining</Heading>
           <ItemCombinationList item={item} />
         </Box>
         <Box background="light-2" align="center">
