@@ -24,9 +24,7 @@ export const ItemList: FC<ItemListProps> = ({ hasNext, items, loadNext }) => {
 
   return (
     <Box pad="small">
-      <List step={3} data={items}>
-        {(item: Item, index: number) => <ItemCombination index={index} item={item} />}
-      </List>
+      <List data={items}>{(item: Item, index: number) => <ItemCombination index={index} item={item} />}</List>
       <Box gap="xxsmall" pad="xxsmall">
         {loadNextButton}
       </Box>

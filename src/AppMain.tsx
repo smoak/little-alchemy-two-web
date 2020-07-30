@@ -6,7 +6,7 @@ import { Routes } from './Routes';
 export const AppMain: FC = () => {
   return (
     <Box fill align="center" justify="start" pad="large">
-      <Main fill alignContent="stretch" pad="large">
+      <Main fill alignContent="stretch">
         <Suspense fallback={'Loading...'}>
           <Routes />
         </Suspense>

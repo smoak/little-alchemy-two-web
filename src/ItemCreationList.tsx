@@ -1,8 +1,9 @@
 import graphql from 'babel-plugin-relay/macro';
-import { Anchor, Box, Button, List, Text } from 'grommet';
+import { Box, Button, List, Text } from 'grommet';
 import React, { FC, useCallback } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
+import { ItemLink } from './ItemLink/ItemLink';
 import { Item } from './ItemList';
 import { ItemCreationListComponent_item$key } from './__generated__/ItemCreationListComponent_item.graphql';
 import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationListPaginationQuery.graphql';
@@ -41,22 +42,19 @@ interface ItemCreationProps {
   };
 }
 const ItemCreation: FC<ItemCreationProps> = ({ item }) => {
-  const sourceHref = `/item/${item.source}`;
-  const targetHref = `/item/${item.target}`;
-
   return (
     <Box direction="row">
-      <Anchor href={sourceHref}>
+      <ItemLink itemName={item.source}>
         <Text key="p" weight="bold" margin="small">
           {item.source}
         </Text>
-      </Anchor>
+      </ItemLink>
       <Text>to make</Text>
-      <Anchor href={targetHref}>
+      <ItemLink itemName={item.target}>
         <Text key="s" margin="small">
           {item.target}
         </Text>
-      </Anchor>
+      </ItemLink>
     </Box>
   );
 };
@@ -81,9 +79,7 @@ export const ItemCreationList: FC<ItemCreationListProps> = ({ item }) => {
 
   return (
     <Box pad="small">
-      <List step={3} data={items}>
-        {(item: Item, index: number) => <ItemCreation item={item} index={index} />}
-      </List>
+      <List data={items}>{(item: Item, index: number) => <ItemCreation item={item} index={index} />}</List>
       <Box gap="xxsmall" pad="xxsmall">
         {loadNextButton}
       </Box>
