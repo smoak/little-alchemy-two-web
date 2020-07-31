@@ -1,7 +1,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import { Box, TextInput } from 'grommet';
 import { Search } from 'grommet-icons';
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState, unstable_useTransition as useTransition } from 'react';
 import { useLazyLoadQuery, useRefetchableFragment } from 'react-relay/hooks';
 import { useHistory } from 'react-router-dom';
 
@@ -34,8 +34,8 @@ const query = graphql`
   }
 `;
 
-const getSuggestions = (data: ItemSearch_search) => {
-  if (!data.search.items || !data.search.items.edges) {
+const getSuggestions = (data: ItemSearch_search, query: string) => {
+  if (!data.search.items || !data.search.items.edges || query === '') {
     return [];
   }
 
@@ -43,30 +43,23 @@ const getSuggestions = (data: ItemSearch_search) => {
 };
 
 export const ItemSearch: FC = () => {
+  const [startTransition] = useTransition();
   const history = useHistory();
   const response = useLazyLoadQuery<ItemSearchQuery>(query, { query: '' });
   const [data, refetch] = useRefetchableFragment<ItemSearchRefetchQuery, ItemSearch_search$key>(fragment, response);
   const [value, setValue] = useState('');
-  const [suggestionOpen, setSuggestionOpen] = useState(false);
-  const onSuggestionsClose = useCallback(() => {
-    setSuggestionOpen(false);
-  }, [setSuggestionOpen]);
-  const onSuggestionsOpen = useCallback(() => {
-    setSuggestionOpen(true);
-  }, [setSuggestionOpen]);
   const onChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
     (event) => {
       const { value: newValue } = event.target;
       setValue(newValue);
 
-      if (!newValue.trim()) {
-        // setSuggestions([]);
-      } else {
-        console.log('Searching...', newValue);
-        refetch({ query: newValue });
+      if (newValue.trim()) {
+        startTransition(() => {
+          refetch({ query: newValue });
+        });
       }
     },
-    [refetch]
+    [refetch, startTransition]
   );
   const onSelect = useCallback(
     ({ suggestion }) => {
@@ -74,10 +67,11 @@ export const ItemSearch: FC = () => {
     },
     [history]
   );
+  const suggestions = getSuggestions(data, value);
+  const hasSuggestions = suggestions.length > 0;
   const boxRef = useRef<HTMLDivElement>(null);
-  const boxElevation = suggestionOpen ? 'medium' : undefined;
-  const boxStyle = suggestionOpen ? { borderBottomLeftRadius: '0px', borderBottomRightRadius: '0px' } : undefined;
-  const suggestions = getSuggestions(data);
+  const boxElevation = hasSuggestions ? 'medium' : undefined;
+  const boxStyle = hasSuggestions ? { borderBottomLeftRadius: '0px', borderBottomRightRadius: '0px' } : undefined;
 
   return (
     <Box fill align="center" pad={{ top: 'large' }}>
@@ -91,7 +85,7 @@ export const ItemSearch: FC = () => {
         elevation={boxElevation}
         border={{
           side: 'all',
-          color: suggestionOpen ? 'transparent' : 'border',
+          color: hasSuggestions ? 'transparent' : 'border',
         }}
         style={boxStyle}
       >
@@ -104,8 +98,6 @@ export const ItemSearch: FC = () => {
           value={value}
           onChange={onChange}
           suggestions={suggestions}
-          onSuggestionsClose={onSuggestionsClose}
-          onSuggestionsOpen={onSuggestionsOpen}
           onSelect={onSelect}
         />
       </Box>
