@@ -2,10 +2,11 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { FC } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
-import { Item, ItemList } from './ItemList';
+import { notEmpty } from '../../data/array';
+import { Item, ItemList } from '../ItemList/ItemList';
+
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
 import { ItemCombinationListPaginationQuery } from './__generated__/ItemCombinationListPaginationQuery.graphql';
-import { notEmpty } from './data/array';
 
 const fragment = graphql`
   fragment ItemCombinationListComponent_item on Item

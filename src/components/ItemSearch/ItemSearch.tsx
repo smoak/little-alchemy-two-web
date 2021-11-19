@@ -5,10 +5,11 @@ import React, { FC, useCallback, useRef, useState, unstable_useTransition as use
 import { useLazyLoadQuery, useRefetchableFragment } from 'react-relay/hooks';
 import { useHistory } from 'react-router-dom';
 
+import { notEmpty } from '../../data/array';
+
 import { ItemSearchQuery } from './__generated__/ItemSearchQuery.graphql';
 import { ItemSearchRefetchQuery } from './__generated__/ItemSearchRefetchQuery.graphql';
 import { ItemSearch_search, ItemSearch_search$key } from './__generated__/ItemSearch_search.graphql';
-import { notEmpty } from './data/array';
 
 const fragment = graphql`
   fragment ItemSearch_search on Query @refetchable(queryName: "ItemSearchRefetchQuery") {

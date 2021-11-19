@@ -1,7 +1,7 @@
 import { Box, Button, List } from 'grommet';
 import React, { FC, useCallback } from 'react';
 
-import { ItemCombination } from './ItemCombination';
+import { ItemCombination } from '../ItemCombination/ItemCombination';
 
 export interface Item {
   readonly source: string;

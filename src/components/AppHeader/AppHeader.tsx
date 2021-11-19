@@ -1,13 +1,13 @@
 import { Box, Button, Header, Heading } from 'grommet';
 import { Home } from 'grommet-icons';
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const AppHeader: FC = () => {
   const history = useHistory();
-  const homeButtonClickCallback = useCallback(() => {
+  const homeButtonClickCallback = () => {
     history.push('/');
-  }, [history]);
+  };
 
   return (
     <Header background="brand">

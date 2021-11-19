@@ -18,6 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:lint": "jest --config config/jest/lint.js",
+    "fix:lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
     "relay": "relay-compiler --src ./src --schema schema.graphql --language typescript"
   },
   "eslintConfig": {

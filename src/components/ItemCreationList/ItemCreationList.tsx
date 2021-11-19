@@ -3,11 +3,12 @@ import { Box, Button, List, Text } from 'grommet';
 import React, { FC, useCallback } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
-import { ItemLink } from './ItemLink/ItemLink';
-import { Item } from './ItemList';
+import { notEmpty } from '../../data/array';
+import { ItemLink } from '../ItemLink/ItemLink';
+import { Item } from '../ItemList/ItemList';
+
 import { ItemCreationListComponent_item$key } from './__generated__/ItemCreationListComponent_item.graphql';
 import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationListPaginationQuery.graphql';
-import { notEmpty } from './data/array';
 
 const fragment = graphql`
   fragment ItemCreationListComponent_item on Item

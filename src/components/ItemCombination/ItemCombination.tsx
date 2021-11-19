@@ -1,8 +1,8 @@
 import { Box, Text } from 'grommet';
 import React, { FC } from 'react';
 
-import { ItemLink } from './ItemLink/ItemLink';
-import { Item } from './ItemList';
+import { ItemLink } from '../ItemLink/ItemLink';
+import { Item } from '../ItemList/ItemList';
 
 interface ItemCombinationProps {
   readonly item: Item;

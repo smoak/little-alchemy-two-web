@@ -4,8 +4,9 @@ import React, { FC } from 'react';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 import { useParams } from 'react-router-dom';
 
-import { ItemCombinationList } from './ItemCombinationList';
-import { ItemCreationList } from './ItemCreationList';
+import { ItemCombinationList } from '../ItemCombinationList/ItemCombinationList';
+import { ItemCreationList } from '../ItemCreationList/ItemCreationList';
+
 import { MythsIcon } from './MythsIcon';
 import { ItemQuery } from './__generated__/ItemQuery.graphql';
 
