@@ -1,7 +1,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import { Box, TextInput } from 'grommet';
 import { Search } from 'grommet-icons';
-import React, { FC, useCallback, useRef, useState, unstable_useTransition as useTransition } from 'react';
+import React, { FC, useCallback, useRef, useState, useTransition } from 'react';
 import { useLazyLoadQuery, useRefetchableFragment } from 'react-relay/hooks';
 import { useHistory } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ const getSuggestions = (data: ItemSearch_search, query: string) => {
 };
 
 export const ItemSearch: FC = () => {
-  const [startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const history = useHistory();
   const response = useLazyLoadQuery<ItemSearchQuery>(query, { query: '' });
   const [data, refetch] = useRefetchableFragment<ItemSearchRefetchQuery, ItemSearch_search$key>(fragment, response);
@@ -97,6 +97,7 @@ export const ItemSearch: FC = () => {
           plain
           placeholder="Search for an item"
           value={value}
+          disabled={isPending}
           onChange={onChange}
           suggestions={suggestions}
           onSelect={onSelect}
