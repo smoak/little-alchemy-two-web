@@ -2,10 +2,10 @@ import graphql from 'babel-plugin-relay/macro';
 import { Box, Grid, Heading } from 'grommet';
 import React, { FC } from 'react';
 import { useLazyLoadQuery } from 'react-relay/hooks';
-import { useParams } from 'react-router-dom';
 
 import { ItemCombinationList } from '../ItemCombinationList/ItemCombinationList';
 import { ItemCreationList } from '../ItemCreationList/ItemCreationList';
+import { useItemParams } from '../Router/hooks';
 
 import { MythsIcon } from './MythsIcon';
 import { ItemQuery } from './__generated__/ItemQuery.graphql';
@@ -23,7 +23,7 @@ const query = graphql`
 `;
 
 export const Item: FC = () => {
-  const { name } = useParams();
+  const { name } = useItemParams();
   const { item } = useLazyLoadQuery<ItemQuery>(query, { name });
 
   if (!item) {
@@ -40,11 +40,11 @@ export const Item: FC = () => {
       </Box>
       <Grid columns={{ count: 2, size: 'auto' }} gap="small">
         <Box background="light-2" align="center">
-          <Heading level="4">Create By Combining</Heading>
+          <Heading level="4">Create {item.name} By Combining</Heading>
           <ItemCombinationList item={item} />
         </Box>
         <Box background="light-2" align="center">
-          <Heading level="4">Combine With</Heading>
+          <Heading level="4">Combine {item.name} With</Heading>
           <ItemCreationList item={item} />
         </Box>
       </Grid>
