@@ -1,7 +1,5 @@
-import { Box, Button, List } from 'grommet';
-import React, { FC, useCallback } from 'react';
-
-import { ItemCombination } from '../ItemCombination/ItemCombination';
+import { Box, InfiniteScroll, InfiniteScrollProps } from 'grommet';
+import React, { FC } from 'react';
 
 export interface Item {
   readonly source: string;
@@ -10,24 +8,25 @@ export interface Item {
 
 type LoadNext = (count: number) => void;
 
-interface ItemListProps {
-  readonly items: Item[];
-  readonly loadNext: LoadNext;
-  readonly hasNext: boolean;
+interface ItemComponentProps {
+  readonly item: Item;
+  readonly index: number;
 }
 
-export const ItemList: FC<ItemListProps> = ({ hasNext, items, loadNext }) => {
-  const onLoadNextClicked = useCallback(() => {
-    loadNext(3);
-  }, [loadNext]);
-  const loadNextButton = hasNext ? <Button secondary label="Load More" onClick={onLoadNextClicked} /> : null;
+interface ItemListProps {
+  readonly items: Item[];
+  readonly onMore?: InfiniteScrollProps['onMore'];
+  render: (props: ItemComponentProps) => React.ReactNode;
+}
 
-  return (
-    <Box pad="small">
-      <List data={items}>{(item: Item, index: number) => <ItemCombination index={index} item={item} />}</List>
-      <Box gap="xxsmall" pad="xxsmall">
-        {loadNextButton}
-      </Box>
-    </Box>
-  );
-};
+export const ItemList: FC<ItemListProps> = ({ items, onMore, render }) => (
+  <Box pad="small">
+    <InfiniteScroll items={items} onMore={onMore} step={10} show={2}>
+      {(item: Item, index: number) => (
+        <Box key={index} pad="small" border={{ side: 'bottom' }} align="center">
+          {render({ item, index })}
+        </Box>
+      )}
+    </InfiniteScroll>
+  </Box>
+);

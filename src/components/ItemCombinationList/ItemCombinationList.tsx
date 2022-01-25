@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
+import { ItemCombination } from '../ItemCombination/ItemCombination';
 import { Item, ItemList } from '../ItemList/ItemList';
 
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
@@ -34,10 +35,13 @@ interface ItemCombinationListProps {
 }
 
 export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
-  const { data, loadNext, hasNext } = usePaginationFragment<
+  const { data, loadNext } = usePaginationFragment<
     ItemCombinationListPaginationQuery,
     ItemCombinationListComponent_item$key
   >(fragment, item);
+  const onMore = () => {
+    loadNext(10);
+  };
 
   const edges = data.combinations.edges;
 
@@ -47,5 +51,11 @@ export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
 
   const items = edges.filter(notEmpty).map<Item>((e) => ({ source: e.node.source.name, target: e.node.target.name }));
 
-  return <ItemList items={items} hasNext={hasNext} loadNext={loadNext} />;
+  return (
+    <ItemList
+      items={items}
+      onMore={onMore}
+      render={({ item, index }) => <ItemCombination key={index} index={index} item={item} />}
+    />
+  );
 };

@@ -3,7 +3,7 @@ import { Box, Grid, Heading } from 'grommet';
 import React, { FC } from 'react';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 
-import { ItemCombinationList } from '../ItemCombinationList/ItemCombinationList';
+// import { ItemCombinationList } from '../ItemCombinationList/ItemCombinationList';
 import { ItemCreationList } from '../ItemCreationList/ItemCreationList';
 import { useItemParams } from '../Router/hooks';
 
@@ -41,7 +41,7 @@ export const Item: FC = () => {
       <Grid columns={{ count: 2, size: 'auto' }} gap="small">
         <Box background="light-2" align="center">
           <Heading level="4">Create {item.name} By Combining</Heading>
-          <ItemCombinationList item={item} />
+          {/* <ItemCombinationList item={item} /> */}
         </Box>
         <Box background="light-2" align="center">
           <Heading level="4">Combine {item.name} With</Heading>
