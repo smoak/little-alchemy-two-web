@@ -10,7 +10,7 @@ export const AppHeader: FC = () => {
   };
 
   return (
-    <Header background="brand">
+    <Header background="brand" pad="small">
       <Button icon={<Home />} hoverIndicator onClick={homeButtonClickCallback} />
       <Box fill align="center" justify="start">
         <Heading level="3" margin="none">

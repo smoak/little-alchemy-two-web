@@ -1,11 +1,11 @@
 import graphql from 'babel-plugin-relay/macro';
-import { Box, Button, List, Text } from 'grommet';
-import React, { FC, useCallback } from 'react';
+import { Box, Text } from 'grommet';
+import React, { FC } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
 import { ItemLink } from '../ItemLink/ItemLink';
-import { Item } from '../ItemList/ItemList';
+import { Item, ItemList } from '../ItemList/ItemList';
 
 import { ItemCreationListComponent_item$key } from './__generated__/ItemCreationListComponent_item.graphql';
 import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationListPaginationQuery.graphql';
@@ -61,13 +61,13 @@ const ItemCreation: FC<ItemCreationProps> = ({ item }) => {
 };
 
 export const ItemCreationList: FC<ItemCreationListProps> = ({ item }) => {
-  const { data, loadNext, hasNext } = usePaginationFragment<
-    ItemCreationListPaginationQuery,
-    ItemCreationListComponent_item$key
-  >(fragment, item);
-  const onLoadNextClicked = useCallback(() => {
-    loadNext(3);
-  }, [loadNext]);
+  const { data, loadNext } = usePaginationFragment<ItemCreationListPaginationQuery, ItemCreationListComponent_item$key>(
+    fragment,
+    item
+  );
+  const onMore = () => {
+    loadNext(10);
+  };
 
   const edges = data.creates.edges;
 
@@ -75,15 +75,13 @@ export const ItemCreationList: FC<ItemCreationListProps> = ({ item }) => {
     return <div>This item does not create anything</div>;
   }
 
-  const loadNextButton = hasNext ? <Button secondary label="Load More" onClick={onLoadNextClicked} /> : null;
   const items = edges.filter(notEmpty).map<Item>((e) => ({ source: e.node.source.name, target: e.node.target.name }));
 
   return (
-    <Box pad="small">
-      <List data={items}>{(item: Item, index: number) => <ItemCreation item={item} index={index} />}</List>
-      <Box gap="xxsmall" pad="xxsmall">
-        {loadNextButton}
-      </Box>
-    </Box>
+    <ItemList
+      items={items}
+      onMore={onMore}
+      render={({ item, index }) => <ItemCreation key={index} item={item} index={index} />}
+    />
   );
 };
