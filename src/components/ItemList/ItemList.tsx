@@ -6,8 +6,6 @@ export interface Item {
   readonly target: string;
 }
 
-type LoadNext = (count: number) => void;
-
 interface ItemComponentProps {
   readonly item: Item;
   readonly index: number;
