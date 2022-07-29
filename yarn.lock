@@ -10268,7 +10268,7 @@ __metadata:
     graphql: ^15.3.0
     grommet: ^2.20.0
     grommet-icons: ^4.7.0
-    prettier: ^2.0.5
+    prettier: ^2.7.1
     react: ^18.0.0-beta-24dd07bd2-20211208
     react-dom: ^18.0.0-beta-24dd07bd2-20211208
     react-relay: ^10.0.1
@@ -12404,12 +12404,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "prettier@npm:2.0.5"
+"prettier@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "prettier@npm:2.7.1"
   bin:
     prettier: bin-prettier.js
-  checksum: 7f89d2f5d1a1a15a7bf200556b8c5395913d0119fe52a3fba51ab116695d584652d37fdb7d86e0919bfe36b22649afcf222eaca00a1065eb486b7b4cf3062eff
+  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
   languageName: node
   linkType: hard
 
