@@ -20,8 +20,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:lint": "jest --config config/jest/lint.js",
-    "fix:lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
     "relay": "relay-compiler --src ./src --schema schema.graphql --language typescript"
   },
   "eslintConfig": {
@@ -51,9 +49,8 @@
     "@types/relay-runtime": "^10.0.1",
     "babel-plugin-relay": "^10.0.1",
     "graphql": "^15.3.0",
-    "jest-runner-eslint": "^0.10.0",
     "prettier": "^2.0.5",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.0",
     "relay-compiler": "^10.0.1",
     "relay-compiler-language-typescript": "^13.0.0",
     "relay-config": "^10.0.1",
