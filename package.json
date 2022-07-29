@@ -4,13 +4,13 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
-    "grommet": "^2.20.0",
+    "grommet": "^2.25.1",
     "grommet-icons": "^4.7.0",
     "react": "^18.0.0-beta-24dd07bd2-20211208",
     "react-dom": "^18.0.0-beta-24dd07bd2-20211208",
     "react-relay": "^10.0.1",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.3.5"
   },
   "engines": {
     "node": ">= 16"
