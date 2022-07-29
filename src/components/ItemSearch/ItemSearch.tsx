@@ -3,7 +3,7 @@ import { Box, Spinner, TextInput } from 'grommet';
 import { Search } from 'grommet-icons';
 import React, { FC, useRef, useState, useTransition } from 'react';
 import { useLazyLoadQuery, useRefetchableFragment } from 'react-relay/hooks';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { notEmpty } from '../../data/array';
 
@@ -55,7 +55,7 @@ const spinnerItem = [
 
 export const ItemSearch: FC = () => {
   const [isPending, startTransition] = useTransition();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [areSuggestionsShowing, setAreSuggestionsShowing] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export const ItemSearch: FC = () => {
     }
   };
   const onSuggestionSelect = ({ suggestion }: { suggestion: string }) => {
-    history.push(`/item/${suggestion}`);
+    navigate(`/item/${suggestion}`);
   };
   const onSuggestionsClose = () => {
     setAreSuggestionsShowing(false);
