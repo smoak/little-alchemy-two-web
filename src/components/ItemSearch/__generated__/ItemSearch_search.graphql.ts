@@ -1,29 +1,33 @@
+/**
+ * @generated SignedSource<<0825a2c690633faf2562e555ac818d4b>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ReaderFragment } from "relay-runtime";
+import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemSearch_search = {
-    readonly search: {
-        readonly items?: {
-            readonly edges: ReadonlyArray<{
-                readonly node: {
-                    readonly id: string;
-                    readonly name: string;
-                    readonly myths: boolean;
-                };
-            } | null> | null;
+export type ItemSearch_search$data = {
+  readonly search: {
+    readonly items?: {
+      readonly edges: ReadonlyArray<{
+        readonly node: {
+          readonly id: string;
+          readonly myths: boolean;
+          readonly name: string;
         };
+      } | null> | null;
     };
-    readonly " $refType": "ItemSearch_search";
+  };
+  readonly " $fragmentType": "ItemSearch_search";
 };
-export type ItemSearch_search$data = ItemSearch_search;
 export type ItemSearch_search$key = {
-    readonly " $data"?: ItemSearch_search$data;
-    readonly " $fragmentRefs": FragmentRefs<"ItemSearch_search">;
+  readonly " $data"?: ItemSearch_search$data;
+  readonly " $fragmentSpreads": FragmentRefs<"ItemSearch_search">;
 };
-
-
 
 const node: ReaderFragment = {
   "argumentDefinitions": [
@@ -37,7 +41,7 @@ const node: ReaderFragment = {
     "refetch": {
       "connection": null,
       "fragmentPathInResult": [],
-      "operation": require('./ItemSearchRefetchQuery.graphql.ts')
+      "operation": require('./ItemSearchRefetchQuery.graphql')
     }
   },
   "name": "ItemSearch_search",
@@ -130,5 +134,7 @@ const node: ReaderFragment = {
   "type": "Query",
   "abstractKey": null
 };
-(node as any).hash = 'be0575cf72dca8276a0a0809c6e0d04d';
+
+(node as any).hash = "be0575cf72dca8276a0a0809c6e0d04d";
+
 export default node;

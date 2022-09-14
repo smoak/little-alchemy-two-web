@@ -1,33 +1,37 @@
+/**
+ * @generated SignedSource<<5d05ae9af009213a68082670a7347b61>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ReaderFragment } from "relay-runtime";
+import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemCreationListComponent_item = {
-    readonly creates: {
-        readonly edges: ReadonlyArray<{
-            readonly node: {
-                readonly source: {
-                    readonly id: string;
-                    readonly name: string;
-                };
-                readonly target: {
-                    readonly id: string;
-                    readonly name: string;
-                };
-            };
-        } | null> | null;
-    };
-    readonly id: string;
-    readonly " $refType": "ItemCreationListComponent_item";
+export type ItemCreationListComponent_item$data = {
+  readonly creates: {
+    readonly edges: ReadonlyArray<{
+      readonly node: {
+        readonly source: {
+          readonly id: string;
+          readonly name: string;
+        };
+        readonly target: {
+          readonly id: string;
+          readonly name: string;
+        };
+      };
+    } | null> | null;
+  };
+  readonly id: string;
+  readonly " $fragmentType": "ItemCreationListComponent_item";
 };
-export type ItemCreationListComponent_item$data = ItemCreationListComponent_item;
 export type ItemCreationListComponent_item$key = {
-    readonly " $data"?: ItemCreationListComponent_item$data;
-    readonly " $fragmentRefs": FragmentRefs<"ItemCreationListComponent_item">;
+  readonly " $data"?: ItemCreationListComponent_item$data;
+  readonly " $fragmentSpreads": FragmentRefs<"ItemCreationListComponent_item">;
 };
-
-
 
 const node: ReaderFragment = (function(){
 var v0 = [
@@ -85,7 +89,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": require('./ItemCreationListPaginationQuery.graphql.ts'),
+      "operation": require('./ItemCreationListPaginationQuery.graphql'),
       "identifierField": "id"
     }
   },
@@ -189,5 +193,7 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '8bedf4071be3ea3ee525049fc26c8d0e';
+
+(node as any).hash = "8bedf4071be3ea3ee525049fc26c8d0e";
+
 export default node;

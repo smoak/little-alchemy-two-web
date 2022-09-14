@@ -1,62 +1,29 @@
+/**
+ * @generated SignedSource<<5ab213f73f1b265a64bff9191890c9be>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ConcreteRequest } from "relay-runtime";
+import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemCreationListPaginationQueryVariables = {
-    count?: number | null;
-    cursor?: string | null;
-    id: string;
+export type ItemCreationListPaginationQuery$variables = {
+  count?: number | null;
+  cursor?: string | null;
+  id: string;
 };
-export type ItemCreationListPaginationQueryResponse = {
-    readonly node: {
-        readonly " $fragmentRefs": FragmentRefs<"ItemCreationListComponent_item">;
-    } | null;
+export type ItemCreationListPaginationQuery$data = {
+  readonly node: {
+    readonly " $fragmentSpreads": FragmentRefs<"ItemCreationListComponent_item">;
+  } | null;
 };
 export type ItemCreationListPaginationQuery = {
-    readonly response: ItemCreationListPaginationQueryResponse;
-    readonly variables: ItemCreationListPaginationQueryVariables;
+  response: ItemCreationListPaginationQuery$data;
+  variables: ItemCreationListPaginationQuery$variables;
 };
-
-
-
-/*
-query ItemCreationListPaginationQuery(
-  $count: Int = 3
-  $cursor: String
-  $id: ID!
-) {
-  node(id: $id) {
-    __typename
-    ...ItemCreationListComponent_item_1G22uz
-    id
-  }
-}
-
-fragment ItemCreationListComponent_item_1G22uz on Item {
-  creates(after: $cursor, first: $count) {
-    edges {
-      node {
-        source {
-          id
-          name
-        }
-        target {
-          id
-          name
-        }
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
-  id
-}
-*/
 
 const node: ConcreteRequest = (function(){
 var v0 = [
@@ -290,5 +257,7 @@ return {
   }
 };
 })();
-(node as any).hash = '8bedf4071be3ea3ee525049fc26c8d0e';
+
+(node as any).hash = "8bedf4071be3ea3ee525049fc26c8d0e";
+
 export default node;

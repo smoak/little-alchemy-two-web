@@ -12,8 +12,8 @@ import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationLis
 
 const fragment = graphql`
   fragment ItemCreationListComponent_item on Item
-    @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
-    @refetchable(queryName: "ItemCreationListPaginationQuery") {
+  @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
+  @refetchable(queryName: "ItemCreationListPaginationQuery") {
     creates(after: $cursor, first: $count) @connection(key: "ItemCreationList_item_creates") {
       edges {
         node {

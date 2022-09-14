@@ -1,87 +1,30 @@
+/**
+ * @generated SignedSource<<0d8724d9a14d350981dead6f3bf28db9>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ConcreteRequest } from "relay-runtime";
+import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemQueryVariables = {
-    name: string;
+export type ItemQuery$variables = {
+  name: string;
 };
-export type ItemQueryResponse = {
-    readonly item: {
-        readonly name: string;
-        readonly myths: boolean;
-        readonly id: string;
-        readonly " $fragmentRefs": FragmentRefs<"ItemCombinationListComponent_item" | "ItemCreationListComponent_item">;
-    } | null;
+export type ItemQuery$data = {
+  readonly item: {
+    readonly id: string;
+    readonly myths: boolean;
+    readonly name: string;
+    readonly " $fragmentSpreads": FragmentRefs<"ItemCombinationListComponent_item" | "ItemCreationListComponent_item">;
+  } | null;
 };
 export type ItemQuery = {
-    readonly response: ItemQueryResponse;
-    readonly variables: ItemQueryVariables;
+  response: ItemQuery$data;
+  variables: ItemQuery$variables;
 };
-
-
-
-/*
-query ItemQuery(
-  $name: String!
-) {
-  item(name: $name) {
-    name
-    myths
-    id
-    ...ItemCombinationListComponent_item
-    ...ItemCreationListComponent_item
-  }
-}
-
-fragment ItemCombinationListComponent_item on Item {
-  combinations(first: 3) {
-    edges {
-      node {
-        source {
-          id
-          name
-        }
-        target {
-          id
-          name
-        }
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
-  id
-}
-
-fragment ItemCreationListComponent_item on Item {
-  creates(first: 3) {
-    edges {
-      node {
-        source {
-          id
-          name
-        }
-        target {
-          id
-          name
-        }
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
-  id
-}
-*/
 
 const node: ConcreteRequest = (function(){
 var v0 = [
@@ -318,5 +261,7 @@ return {
   }
 };
 })();
-(node as any).hash = '29ffa047612fa68c8caa8b574619233e';
+
+(node as any).hash = "29ffa047612fa68c8caa8b574619233e";
+
 export default node;

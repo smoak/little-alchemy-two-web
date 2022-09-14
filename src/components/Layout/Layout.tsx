@@ -1,9 +1,13 @@
 import { Main } from 'grommet';
-import React, { FC, Suspense } from 'react';
+import React, { FC, ReactNode, Suspense } from 'react';
 
 import { AppHeader } from '../AppHeader/AppHeader';
 
-export const Layout: FC = ({ children }) => (
+type LayoutProps = {
+  readonly children?: ReactNode;
+};
+
+export const Layout: FC<LayoutProps> = ({ children }) => (
   <>
     <AppHeader />
     <Main fill alignContent="stretch">

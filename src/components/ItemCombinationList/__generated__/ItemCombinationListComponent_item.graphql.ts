@@ -1,33 +1,37 @@
+/**
+ * @generated SignedSource<<0dd3862022eb90b98b2b81ae4bde2870>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ReaderFragment } from "relay-runtime";
+import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemCombinationListComponent_item = {
-    readonly combinations: {
-        readonly edges: ReadonlyArray<{
-            readonly node: {
-                readonly source: {
-                    readonly id: string;
-                    readonly name: string;
-                };
-                readonly target: {
-                    readonly id: string;
-                    readonly name: string;
-                };
-            };
-        } | null> | null;
-    };
-    readonly id: string;
-    readonly " $refType": "ItemCombinationListComponent_item";
+export type ItemCombinationListComponent_item$data = {
+  readonly combinations: {
+    readonly edges: ReadonlyArray<{
+      readonly node: {
+        readonly source: {
+          readonly id: string;
+          readonly name: string;
+        };
+        readonly target: {
+          readonly id: string;
+          readonly name: string;
+        };
+      };
+    } | null> | null;
+  };
+  readonly id: string;
+  readonly " $fragmentType": "ItemCombinationListComponent_item";
 };
-export type ItemCombinationListComponent_item$data = ItemCombinationListComponent_item;
 export type ItemCombinationListComponent_item$key = {
-    readonly " $data"?: ItemCombinationListComponent_item$data;
-    readonly " $fragmentRefs": FragmentRefs<"ItemCombinationListComponent_item">;
+  readonly " $data"?: ItemCombinationListComponent_item$data;
+  readonly " $fragmentSpreads": FragmentRefs<"ItemCombinationListComponent_item">;
 };
-
-
 
 const node: ReaderFragment = (function(){
 var v0 = [
@@ -85,7 +89,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": require('./ItemCombinationListPaginationQuery.graphql.ts'),
+      "operation": require('./ItemCombinationListPaginationQuery.graphql'),
       "identifierField": "id"
     }
   },
@@ -189,5 +193,7 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'eca672ea8b79ae80201f492d2237a055';
+
+(node as any).hash = "eca672ea8b79ae80201f492d2237a055";
+
 export default node;

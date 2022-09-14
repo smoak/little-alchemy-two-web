@@ -9,7 +9,7 @@ import { notEmpty } from '../../data/array';
 
 import { ItemSearchQuery } from './__generated__/ItemSearchQuery.graphql';
 import { ItemSearchRefetchQuery } from './__generated__/ItemSearchRefetchQuery.graphql';
-import { ItemSearch_search, ItemSearch_search$key } from './__generated__/ItemSearch_search.graphql';
+import { ItemSearch_search$key, ItemSearch_search$data } from './__generated__/ItemSearch_search.graphql';
 
 const fragment = graphql`
   fragment ItemSearch_search on Query @refetchable(queryName: "ItemSearchRefetchQuery") {
@@ -35,7 +35,7 @@ const query = graphql`
   }
 `;
 
-const getSuggestions = (data: ItemSearch_search, query: string) => {
+const getSuggestions = (data: ItemSearch_search$data, query: string) => {
   if (!data.search.items || !data.search.items.edges || query === '') {
     return [];
   }

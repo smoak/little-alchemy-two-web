@@ -1,62 +1,29 @@
+/**
+ * @generated SignedSource<<fdf0ab1ffd40b517bbab50b7905a42ba>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ConcreteRequest } from "relay-runtime";
+import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemCombinationListPaginationQueryVariables = {
-    count?: number | null;
-    cursor?: string | null;
-    id: string;
+export type ItemCombinationListPaginationQuery$variables = {
+  count?: number | null;
+  cursor?: string | null;
+  id: string;
 };
-export type ItemCombinationListPaginationQueryResponse = {
-    readonly node: {
-        readonly " $fragmentRefs": FragmentRefs<"ItemCombinationListComponent_item">;
-    } | null;
+export type ItemCombinationListPaginationQuery$data = {
+  readonly node: {
+    readonly " $fragmentSpreads": FragmentRefs<"ItemCombinationListComponent_item">;
+  } | null;
 };
 export type ItemCombinationListPaginationQuery = {
-    readonly response: ItemCombinationListPaginationQueryResponse;
-    readonly variables: ItemCombinationListPaginationQueryVariables;
+  response: ItemCombinationListPaginationQuery$data;
+  variables: ItemCombinationListPaginationQuery$variables;
 };
-
-
-
-/*
-query ItemCombinationListPaginationQuery(
-  $count: Int = 3
-  $cursor: String
-  $id: ID!
-) {
-  node(id: $id) {
-    __typename
-    ...ItemCombinationListComponent_item_1G22uz
-    id
-  }
-}
-
-fragment ItemCombinationListComponent_item_1G22uz on Item {
-  combinations(after: $cursor, first: $count) {
-    edges {
-      node {
-        source {
-          id
-          name
-        }
-        target {
-          id
-          name
-        }
-        __typename
-      }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
-  id
-}
-*/
 
 const node: ConcreteRequest = (function(){
 var v0 = [
@@ -290,5 +257,7 @@ return {
   }
 };
 })();
-(node as any).hash = 'eca672ea8b79ae80201f492d2237a055';
+
+(node as any).hash = "eca672ea8b79ae80201f492d2237a055";
+
 export default node;

@@ -1,45 +1,25 @@
+/**
+ * @generated SignedSource<<c7bb42521c4705b9afbce6f150d2c8cb>>
+ * @lightSyntaxTransform
+ * @nogrep
+ */
+
 /* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-import { ConcreteRequest } from "relay-runtime";
+import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemSearchRefetchQueryVariables = {
-    query: string;
+export type ItemSearchRefetchQuery$variables = {
+  query: string;
 };
-export type ItemSearchRefetchQueryResponse = {
-    readonly " $fragmentRefs": FragmentRefs<"ItemSearch_search">;
+export type ItemSearchRefetchQuery$data = {
+  readonly " $fragmentSpreads": FragmentRefs<"ItemSearch_search">;
 };
 export type ItemSearchRefetchQuery = {
-    readonly response: ItemSearchRefetchQueryResponse;
-    readonly variables: ItemSearchRefetchQueryVariables;
+  response: ItemSearchRefetchQuery$data;
+  variables: ItemSearchRefetchQuery$variables;
 };
-
-
-
-/*
-query ItemSearchRefetchQuery(
-  $query: String!
-) {
-  ...ItemSearch_search
-}
-
-fragment ItemSearch_search on Query {
-  search(query: $query) {
-    __typename
-    ... on ItemSearchResults {
-      items(first: 5) {
-        edges {
-          node {
-            id
-            name
-            myths
-          }
-        }
-      }
-    }
-  }
-}
-*/
 
 const node: ConcreteRequest = (function(){
 var v0 = [
@@ -174,5 +154,7 @@ return {
   }
 };
 })();
-(node as any).hash = 'be0575cf72dca8276a0a0809c6e0d04d';
+
+(node as any).hash = "be0575cf72dca8276a0a0809c6e0d04d";
+
 export default node;

@@ -11,8 +11,8 @@ import { ItemCombinationListPaginationQuery } from './__generated__/ItemCombinat
 
 const fragment = graphql`
   fragment ItemCombinationListComponent_item on Item
-    @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
-    @refetchable(queryName: "ItemCombinationListPaginationQuery") {
+  @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
+  @refetchable(queryName: "ItemCombinationListPaginationQuery") {
     combinations(after: $cursor, first: $count) @connection(key: "ItemCombinationList_item_combinations") {
       edges {
         node {
