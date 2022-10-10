@@ -2,6 +2,7 @@ import { ThemeType } from 'grommet';
 
 export const theme: ThemeType = {
   global: {
+    spacing: "16px",
     colors: {
       brand: '#228BE6',
     },

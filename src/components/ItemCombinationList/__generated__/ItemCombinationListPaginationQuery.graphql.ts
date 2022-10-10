@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fdf0ab1ffd40b517bbab50b7905a42ba>>
+ * @generated SignedSource<<e5a2369e0d56bf462987eb097ad61691>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -28,7 +28,7 @@ export type ItemCombinationListPaginationQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": 3,
+    "defaultValue": 5,
     "kind": "LocalArgument",
     "name": "count"
   },
@@ -83,6 +83,20 @@ v5 = [
     "args": null,
     "kind": "ScalarField",
     "name": "name",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "imageUrl",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "myths",
     "storageKey": null
   }
 ];
@@ -248,16 +262,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d206bc221deef33f33c128e8803f7198",
+    "cacheID": "990330f2734ed3906cb200debb315c9a",
     "id": null,
     "metadata": {},
     "name": "ItemCombinationListPaginationQuery",
     "operationKind": "query",
-    "text": "query ItemCombinationListPaginationQuery(\n  $count: Int = 3\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...ItemCombinationListComponent_item_1G22uz\n    id\n  }\n}\n\nfragment ItemCombinationListComponent_item_1G22uz on Item {\n  combinations(after: $cursor, first: $count) {\n    edges {\n      node {\n        source {\n          id\n          name\n        }\n        target {\n          id\n          name\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query ItemCombinationListPaginationQuery(\n  $count: Int = 5\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...ItemCombinationListComponent_item_1G22uz\n    id\n  }\n}\n\nfragment ItemCombinationListComponent_item_1G22uz on Item {\n  combinations(after: $cursor, first: $count) {\n    edges {\n      node {\n        source {\n          id\n          name\n          imageUrl\n          myths\n        }\n        target {\n          id\n          name\n          imageUrl\n          myths\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "eca672ea8b79ae80201f492d2237a055";
+(node as any).hash = "2ba5c169c7eee447f9f0725e70996114";
 
 export default node;

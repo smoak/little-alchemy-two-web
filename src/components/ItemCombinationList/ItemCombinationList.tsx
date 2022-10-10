@@ -1,17 +1,17 @@
 import graphql from 'babel-plugin-relay/macro';
-import React, { FC } from 'react';
+import { Grid, InfiniteScroll, ResponsiveContext } from 'grommet';
+import React, { FC, useContext } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
-import { ItemCombination } from '../ItemCombination/ItemCombination';
-import { Item, ItemList } from '../ItemList/ItemList';
+import { ItemCombinationCard } from '../ItemCombinationCard/ItemCombinationCard';
 
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
 import { ItemCombinationListPaginationQuery } from './__generated__/ItemCombinationListPaginationQuery.graphql';
 
 const fragment = graphql`
   fragment ItemCombinationListComponent_item on Item
-  @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
+  @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 5 })
   @refetchable(queryName: "ItemCombinationListPaginationQuery") {
     combinations(after: $cursor, first: $count) @connection(key: "ItemCombinationList_item_combinations") {
       edges {
@@ -19,16 +19,34 @@ const fragment = graphql`
           source {
             id
             name
+            imageUrl
+            myths
           }
           target {
             id
             name
+            imageUrl
+            myths
           }
         }
       }
     }
   }
 `;
+
+type Item = {
+  readonly name: string;
+  readonly myths: boolean;
+  readonly imageUrl: string;
+  readonly id: string;
+};
+
+type ItemCombination = {
+  readonly node: {
+    readonly source: Item;
+    readonly target: Item;
+  };
+};
 
 interface ItemCombinationListProps {
   readonly item: ItemCombinationListComponent_item$key;
@@ -49,13 +67,19 @@ export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
     return <div>No combinations</div>;
   }
 
-  const items = edges.filter(notEmpty).map<Item>((e) => ({ source: e.node.source.name, target: e.node.target.name }));
+  const items = edges.filter(notEmpty);
 
   return (
-    <ItemList
-      items={items}
-      onMore={onMore}
-      render={({ item, index }) => <ItemCombination key={index} index={index} item={item} />}
-    />
+    <InfiniteScroll items={items} onMore={onMore} step={10} show={2}>
+      {(i: ItemCombination) => (
+        <ItemCombinationCard
+          key={i.node.source.id + i.node.target.id}
+          source={i.node.source.name}
+          target={i.node.target.name}
+          sourceImageUrl={i.node.source.imageUrl}
+          targetImageUrl={i.node.target.imageUrl}
+        />
+      )}
+    </InfiniteScroll>
   );
 };

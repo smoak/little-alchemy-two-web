@@ -1,13 +1,12 @@
 import graphql from 'babel-plugin-relay/macro';
-import { Box, Grid, Text } from 'grommet';
-import React, { FC } from 'react';
+import { Box, Grid, Tab, Tabs } from 'grommet';
+import { FC } from 'react';
 import { useLazyLoadQuery } from 'react-relay/hooks';
-
 import { ItemCombinationList } from '../ItemCombinationList/ItemCombinationList';
 import { ItemCreationList } from '../ItemCreationList/ItemCreationList';
+
 import { useItemParams } from '../Router/hooks';
 
-import { MythsIcon } from './MythsIcon';
 import { ItemQuery } from './__generated__/ItemQuery.graphql';
 
 const query = graphql`
@@ -16,6 +15,7 @@ const query = graphql`
       name
       myths
       id
+      imageUrl
       ...ItemCombinationListComponent_item
       ...ItemCreationListComponent_item
     }
@@ -34,39 +34,22 @@ export const Item: FC<ItemProps> = ({ itemName }) => {
     return <>No item found</>;
   }
 
-  const mythsIcon = item.myths ? <MythsIcon /> : null;
-
   return (
-    <Box pad="xsmall" fill>
-      <Box align="center" justify="center" background="neutral-3" pad={{ horizontal: 'medium', vertical: 'small' }}>
-        <Text size="large">{item.name}</Text>
-        {mythsIcon}
-      </Box>
-      <Grid fill gap="small" columns={{ count: 2, size: 'auto' }}>
-        <Box background="light-2">
-          <Box
-            background="light-3"
-            align="center"
-            justify="center"
-            pad={{ horizontal: 'small', vertical: 'small' }}
-            border={{ side: 'bottom' }}
-          >
-            <Text size="large">Create {item.name} by combining</Text>
-          </Box>
-          <ItemCombinationList item={item} />
+    <Tabs>
+      <Tab title="Combinations">
+        <Box pad="small">
+          <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+            <ItemCombinationList item={item} />
+          </Grid>
         </Box>
-        <Box background="light-2">
-          <Box
-            align="center"
-            justify="center"
-            pad={{ horizontal: 'small', vertical: 'small' }}
-            border={{ side: 'bottom' }}
-          >
-            <Text size="large">Combine {item.name} with</Text>
-          </Box>
-          <ItemCreationList item={item} />
+      </Tab>
+      <Tab title="Pair with">
+        <Box pad="small">
+          <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+            <ItemCreationList item={item} itemName={name} itemImageUrl={item.imageUrl} />
+          </Grid>
         </Box>
-      </Grid>
-    </Box>
+      </Tab>
+    </Tabs>
   );
 };

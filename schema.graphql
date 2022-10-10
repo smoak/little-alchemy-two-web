@@ -1,12 +1,12 @@
 type Query {
-  items(after: String, first: Int, before: String, last: Int): ItemConnection! 
+  items(after: String, first: Int, before: String, last: Int): ItemConnection!
   node(id: ID!): Node
   item(name: String!): Item
   search(query: String!): SearchResults!
 }
 
 interface Node {
-   id: ID!
+  id: ID!
 }
 
 type PageInfo {
@@ -47,10 +47,11 @@ type Item implements Node {
   myths: Boolean!
   creates(after: String, first: Int, before: String, last: Int): ItemCombinationConnection!
   combinations(after: String, first: Int, before: String, last: Int): ItemCombinationConnection!
+  imageUrl: String!
 }
 
 type ItemSearchResults {
-  items(after: String, first: Int, before: String, last: Int): ItemConnection! 
+  items(after: String, first: Int, before: String, last: Int): ItemConnection!
 }
 
 type NoSearchResults {

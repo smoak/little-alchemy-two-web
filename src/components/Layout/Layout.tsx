@@ -11,7 +11,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => (
   <>
     <AppHeader />
     <Main fill alignContent="stretch">
-      <Suspense fallback={'Loading...'}>{children}</Suspense>
+      <Suspense fallback="Loading...">{children}</Suspense>
     </Main>
   </>
 );

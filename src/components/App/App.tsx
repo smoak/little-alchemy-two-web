@@ -1,5 +1,5 @@
 import { Grommet } from 'grommet';
-import React, { FC } from 'react';
+import React, { FC, Suspense } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 
 import { Router } from '../Router/Router';
@@ -10,7 +10,9 @@ import { theme } from './theme';
 export const App: FC = () => (
   <Grommet theme={theme} full>
     <RelayEnvironmentProvider environment={environment}>
-      <Router />
+      <Suspense fallback="Loading...">
+        <Router />
+      </Suspense>
     </RelayEnvironmentProvider>
   </Grommet>
 );

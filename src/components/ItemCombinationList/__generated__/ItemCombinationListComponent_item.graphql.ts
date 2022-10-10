@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0dd3862022eb90b98b2b81ae4bde2870>>
+ * @generated SignedSource<<f66fe33b6e8ea0cfe53703b62988c23b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,10 +16,14 @@ export type ItemCombinationListComponent_item$data = {
       readonly node: {
         readonly source: {
           readonly id: string;
+          readonly imageUrl: string;
+          readonly myths: boolean;
           readonly name: string;
         };
         readonly target: {
           readonly id: string;
+          readonly imageUrl: string;
+          readonly myths: boolean;
           readonly name: string;
         };
       };
@@ -52,12 +56,26 @@ v2 = [
     "kind": "ScalarField",
     "name": "name",
     "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "imageUrl",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "myths",
+    "storageKey": null
   }
 ];
 return {
   "argumentDefinitions": [
     {
-      "defaultValue": 3,
+      "defaultValue": 5,
       "kind": "LocalArgument",
       "name": "count"
     },
@@ -194,6 +212,6 @@ return {
 };
 })();
 
-(node as any).hash = "eca672ea8b79ae80201f492d2237a055";
+(node as any).hash = "2ba5c169c7eee447f9f0725e70996114";
 
 export default node;

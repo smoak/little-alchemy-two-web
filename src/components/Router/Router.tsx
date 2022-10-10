@@ -1,17 +1,14 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Home } from '../Home/Home';
-import { Item } from '../Item/Item';
-import { Layout } from '../Layout/Layout';
+import { PageHome } from '../PageHome/PageHome';
+import { PageItem } from '../PageItem/PageItem';
 
 export const Router: FC = () => (
   <BrowserRouter>
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/item/:name" element={<Item />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<PageHome />} />
+      <Route path="/item/:name" element={<PageItem />} />
+    </Routes>
   </BrowserRouter>
 );
