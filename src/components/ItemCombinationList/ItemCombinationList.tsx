@@ -1,29 +1,21 @@
 import graphql from 'babel-plugin-relay/macro';
-import React, { FC } from 'react';
+import { Box, Button, Grid } from 'grommet';
+import { FC } from 'react';
 import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
-import { ItemCombination } from '../ItemCombination/ItemCombination';
-import { Item, ItemList } from '../ItemList/ItemList';
+import { ItemCombinationCard } from '../ItemCombinationCard/ItemCombinationCard';
 
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
 import { ItemCombinationListPaginationQuery } from './__generated__/ItemCombinationListPaginationQuery.graphql';
 
 const fragment = graphql`
-  fragment ItemCombinationListComponent_item on Item
-  @argumentDefinitions(cursor: { type: "String" }, count: { type: "Int", defaultValue: 3 })
-  @refetchable(queryName: "ItemCombinationListPaginationQuery") {
+  fragment ItemCombinationListComponent_item on Item @refetchable(queryName: "ItemCombinationListPaginationQuery") {
+    name
     combinations(after: $cursor, first: $count) @connection(key: "ItemCombinationList_item_combinations") {
       edges {
         node {
-          source {
-            id
-            name
-          }
-          target {
-            id
-            name
-          }
+          ...ItemCombinationCardComponent_itemCombination
         }
       }
     }
@@ -35,7 +27,7 @@ interface ItemCombinationListProps {
 }
 
 export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
-  const { data, loadNext } = usePaginationFragment<
+  const { data, loadNext, isLoadingNext, hasNext } = usePaginationFragment<
     ItemCombinationListPaginationQuery,
     ItemCombinationListComponent_item$key
   >(fragment, item);
@@ -44,18 +36,28 @@ export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
   };
 
   const edges = data.combinations.edges;
+  const items = edges?.filter(notEmpty);
 
-  if (!edges) {
+  if (!items || items.length === 0) {
     return <div>No combinations</div>;
   }
 
-  const items = edges.filter(notEmpty).map<Item>((e) => ({ source: e.node.source.name, target: e.node.target.name }));
+  if (isLoadingNext) {
+    return <>Loading...</>;
+  }
 
   return (
-    <ItemList
-      items={items}
-      onMore={onMore}
-      render={({ item, index }) => <ItemCombination key={index} index={index} item={item} />}
-    />
+    <>
+      <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+        {items.map((i, index) => (
+          <ItemCombinationCard key={index} itemCombination={i.node} />
+        ))}
+      </Grid>
+      {hasNext && (
+        <Box direction="row" align="center" pad="medium" gap="medium">
+          <Button primary onClick={onMore} label="load more" />
+        </Box>
+      )}
+    </>
   );
 };

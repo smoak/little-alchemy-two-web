@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0dd3862022eb90b98b2b81ae4bde2870>>
+ * @generated SignedSource<<f16af3a224bf8266449a04632805b756>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,18 +14,12 @@ export type ItemCombinationListComponent_item$data = {
   readonly combinations: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly source: {
-          readonly id: string;
-          readonly name: string;
-        };
-        readonly target: {
-          readonly id: string;
-          readonly name: string;
-        };
+        readonly " $fragmentSpreads": FragmentRefs<"ItemCombinationCardComponent_itemCombination">;
       };
     } | null> | null;
   };
   readonly id: string;
+  readonly name: string;
   readonly " $fragmentType": "ItemCombinationListComponent_item";
 };
 export type ItemCombinationListComponent_item$key = {
@@ -36,34 +30,15 @@ export type ItemCombinationListComponent_item$key = {
 const node: ReaderFragment = (function(){
 var v0 = [
   "combinations"
-],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v2 = [
-  (v1/*: any*/),
-  {
-    "alias": null,
-    "args": null,
-    "kind": "ScalarField",
-    "name": "name",
-    "storageKey": null
-  }
 ];
 return {
   "argumentDefinitions": [
     {
-      "defaultValue": 3,
-      "kind": "LocalArgument",
+      "kind": "RootArgument",
       "name": "count"
     },
     {
-      "defaultValue": null,
-      "kind": "LocalArgument",
+      "kind": "RootArgument",
       "name": "cursor"
     }
   ],
@@ -96,6 +71,13 @@ return {
   "name": "ItemCombinationListComponent_item",
   "selections": [
     {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "name",
+      "storageKey": null
+    },
+    {
       "alias": "combinations",
       "args": null,
       "concreteType": "ItemCombinationConnection",
@@ -120,24 +102,9 @@ return {
               "plural": false,
               "selections": [
                 {
-                  "alias": null,
                   "args": null,
-                  "concreteType": "Item",
-                  "kind": "LinkedField",
-                  "name": "source",
-                  "plural": false,
-                  "selections": (v2/*: any*/),
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Item",
-                  "kind": "LinkedField",
-                  "name": "target",
-                  "plural": false,
-                  "selections": (v2/*: any*/),
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "ItemCombinationCardComponent_itemCombination"
                 },
                 {
                   "alias": null,
@@ -187,13 +154,19 @@ return {
       ],
       "storageKey": null
     },
-    (v1/*: any*/)
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    }
   ],
   "type": "Item",
   "abstractKey": null
 };
 })();
 
-(node as any).hash = "eca672ea8b79ae80201f492d2237a055";
+(node as any).hash = "58218e451ce6cd1eacc4f36d50e0ae5d";
 
 export default node;

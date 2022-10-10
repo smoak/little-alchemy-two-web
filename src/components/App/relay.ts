@@ -6,7 +6,6 @@ const fetchQuery: FetchFunction = async (operation, variables) => {
   }
 
   const body = JSON.stringify({ query: operation.text, variables });
-  console.log(body);
   const response = await fetch(process.env.REACT_APP_GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -14,7 +13,6 @@ const fetchQuery: FetchFunction = async (operation, variables) => {
     },
     body,
   });
-  console.log(response);
 
   return response.json();
 };

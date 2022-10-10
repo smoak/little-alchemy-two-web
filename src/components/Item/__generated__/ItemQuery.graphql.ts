@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0d8724d9a14d350981dead6f3bf28db9>>
+ * @generated SignedSource<<9c72f9238b0d3bee9eef21eae41b2d31>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,11 +11,14 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type ItemQuery$variables = {
+  count?: number | null;
+  cursor?: string | null;
   name: string;
 };
 export type ItemQuery$data = {
   readonly item: {
     readonly id: string;
+    readonly imageUrl: string;
     readonly myths: boolean;
     readonly name: string;
     readonly " $fragmentSpreads": FragmentRefs<"ItemCombinationListComponent_item" | "ItemCreationListComponent_item">;
@@ -27,53 +30,75 @@ export type ItemQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "name"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "count"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "cursor"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "name"
+},
+v3 = [
   {
     "kind": "Variable",
     "name": "name",
     "variableName": "name"
   }
 ],
-v2 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v3 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "myths",
   "storageKey": null
 },
-v4 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v5 = [
+v7 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "imageUrl",
+  "storageKey": null
+},
+v8 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
+    "name": "after",
+    "variableName": "cursor"
+  },
+  {
+    "kind": "Variable",
     "name": "first",
-    "value": 3
+    "variableName": "count"
   }
 ],
-v6 = [
+v9 = [
+  (v6/*: any*/),
   (v4/*: any*/),
-  (v2/*: any*/)
+  (v7/*: any*/),
+  (v5/*: any*/)
 ],
-v7 = [
+v10 = [
   {
     "alias": null,
     "args": null,
@@ -97,7 +122,7 @@ v7 = [
             "kind": "LinkedField",
             "name": "source",
             "plural": false,
-            "selections": (v6/*: any*/),
+            "selections": (v9/*: any*/),
             "storageKey": null
           },
           {
@@ -107,7 +132,7 @@ v7 = [
             "kind": "LinkedField",
             "name": "target",
             "plural": false,
-            "selections": (v6/*: any*/),
+            "selections": (v9/*: any*/),
             "storageKey": null
           },
           {
@@ -158,22 +183,27 @@ v7 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "ItemQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v3/*: any*/),
         "concreteType": "Item",
         "kind": "LinkedField",
         "name": "item",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
+          (v6/*: any*/),
+          (v7/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -193,34 +223,39 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v2/*: any*/),
+      (v0/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Operation",
     "name": "ItemQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v3/*: any*/),
         "concreteType": "Item",
         "kind": "LinkedField",
         "name": "item",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
+          (v6/*: any*/),
+          (v7/*: any*/),
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v8/*: any*/),
             "concreteType": "ItemCombinationConnection",
             "kind": "LinkedField",
             "name": "combinations",
             "plural": false,
-            "selections": (v7/*: any*/),
-            "storageKey": "combinations(first:3)"
+            "selections": (v10/*: any*/),
+            "storageKey": null
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v8/*: any*/),
             "filters": null,
             "handle": "connection",
             "key": "ItemCombinationList_item_combinations",
@@ -229,17 +264,17 @@ return {
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v8/*: any*/),
             "concreteType": "ItemCombinationConnection",
             "kind": "LinkedField",
             "name": "creates",
             "plural": false,
-            "selections": (v7/*: any*/),
-            "storageKey": "creates(first:3)"
+            "selections": (v10/*: any*/),
+            "storageKey": null
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v8/*: any*/),
             "filters": null,
             "handle": "connection",
             "key": "ItemCreationList_item_creates",
@@ -252,16 +287,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "35070be729181671d058ba93e1401ede",
+    "cacheID": "f839e077f1f55861da8c383646bb66dd",
     "id": null,
     "metadata": {},
     "name": "ItemQuery",
     "operationKind": "query",
-    "text": "query ItemQuery(\n  $name: String!\n) {\n  item(name: $name) {\n    name\n    myths\n    id\n    ...ItemCombinationListComponent_item\n    ...ItemCreationListComponent_item\n  }\n}\n\nfragment ItemCombinationListComponent_item on Item {\n  combinations(first: 3) {\n    edges {\n      node {\n        source {\n          id\n          name\n        }\n        target {\n          id\n          name\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ItemCreationListComponent_item on Item {\n  creates(first: 3) {\n    edges {\n      node {\n        source {\n          id\n          name\n        }\n        target {\n          id\n          name\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query ItemQuery(\n  $name: String!\n  $count: Int\n  $cursor: String\n) {\n  item(name: $name) {\n    name\n    myths\n    id\n    imageUrl\n    ...ItemCombinationListComponent_item\n    ...ItemCreationListComponent_item\n  }\n}\n\nfragment ItemCombinationCardComponent_itemCombination on ItemCombination {\n  source {\n    id\n    name\n    imageUrl\n    myths\n  }\n  target {\n    id\n    name\n    imageUrl\n    myths\n  }\n}\n\nfragment ItemCombinationListComponent_item on Item {\n  name\n  combinations(after: $cursor, first: $count) {\n    edges {\n      node {\n        ...ItemCombinationCardComponent_itemCombination\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ItemCreationCardComponent_itemCombination on ItemCombination {\n  source {\n    id\n    name\n    imageUrl\n    myths\n  }\n  target {\n    id\n    name\n    imageUrl\n    myths\n  }\n}\n\nfragment ItemCreationListComponent_item on Item {\n  name\n  imageUrl\n  creates(after: $cursor, first: $count) {\n    edges {\n      node {\n        ...ItemCreationCardComponent_itemCombination\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "29ffa047612fa68c8caa8b574619233e";
+(node as any).hash = "80f2bdf009602822cabaa5307b299685";
 
 export default node;

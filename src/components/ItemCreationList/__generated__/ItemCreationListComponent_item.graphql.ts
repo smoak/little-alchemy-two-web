@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5d05ae9af009213a68082670a7347b61>>
+ * @generated SignedSource<<a1fa4c8553dc15c407fb0fa9d2ba9ee5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,18 +14,13 @@ export type ItemCreationListComponent_item$data = {
   readonly creates: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly source: {
-          readonly id: string;
-          readonly name: string;
-        };
-        readonly target: {
-          readonly id: string;
-          readonly name: string;
-        };
+        readonly " $fragmentSpreads": FragmentRefs<"ItemCreationCardComponent_itemCombination">;
       };
     } | null> | null;
   };
   readonly id: string;
+  readonly imageUrl: string;
+  readonly name: string;
   readonly " $fragmentType": "ItemCreationListComponent_item";
 };
 export type ItemCreationListComponent_item$key = {
@@ -36,34 +31,15 @@ export type ItemCreationListComponent_item$key = {
 const node: ReaderFragment = (function(){
 var v0 = [
   "creates"
-],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v2 = [
-  (v1/*: any*/),
-  {
-    "alias": null,
-    "args": null,
-    "kind": "ScalarField",
-    "name": "name",
-    "storageKey": null
-  }
 ];
 return {
   "argumentDefinitions": [
     {
-      "defaultValue": 3,
-      "kind": "LocalArgument",
+      "kind": "RootArgument",
       "name": "count"
     },
     {
-      "defaultValue": null,
-      "kind": "LocalArgument",
+      "kind": "RootArgument",
       "name": "cursor"
     }
   ],
@@ -96,6 +72,20 @@ return {
   "name": "ItemCreationListComponent_item",
   "selections": [
     {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "name",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "imageUrl",
+      "storageKey": null
+    },
+    {
       "alias": "creates",
       "args": null,
       "concreteType": "ItemCombinationConnection",
@@ -120,24 +110,9 @@ return {
               "plural": false,
               "selections": [
                 {
-                  "alias": null,
                   "args": null,
-                  "concreteType": "Item",
-                  "kind": "LinkedField",
-                  "name": "source",
-                  "plural": false,
-                  "selections": (v2/*: any*/),
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "Item",
-                  "kind": "LinkedField",
-                  "name": "target",
-                  "plural": false,
-                  "selections": (v2/*: any*/),
-                  "storageKey": null
+                  "kind": "FragmentSpread",
+                  "name": "ItemCreationCardComponent_itemCombination"
                 },
                 {
                   "alias": null,
@@ -187,13 +162,19 @@ return {
       ],
       "storageKey": null
     },
-    (v1/*: any*/)
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    }
   ],
   "type": "Item",
   "abstractKey": null
 };
 })();
 
-(node as any).hash = "8bedf4071be3ea3ee525049fc26c8d0e";
+(node as any).hash = "3e5dc7cf1aea94f4708b4109e655100b";
 
 export default node;

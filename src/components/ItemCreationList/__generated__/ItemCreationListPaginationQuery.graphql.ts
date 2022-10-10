@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5ab213f73f1b265a64bff9191890c9be>>
+ * @generated SignedSource<<b575653a0db5364f6055083754e67f43>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -28,7 +28,7 @@ export type ItemCreationListPaginationQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": 3,
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "count"
   },
@@ -64,7 +64,21 @@ v3 = {
   "name": "id",
   "storageKey": null
 },
-v4 = [
+v4 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "imageUrl",
+  "storageKey": null
+},
+v6 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -76,13 +90,15 @@ v4 = [
     "variableName": "count"
   }
 ],
-v5 = [
+v7 = [
   (v3/*: any*/),
+  (v4/*: any*/),
+  (v5/*: any*/),
   {
     "alias": null,
     "args": null,
     "kind": "ScalarField",
-    "name": "name",
+    "name": "myths",
     "storageKey": null
   }
 ];
@@ -102,18 +118,7 @@ return {
         "plural": false,
         "selections": [
           {
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "count",
-                "variableName": "count"
-              },
-              {
-                "kind": "Variable",
-                "name": "cursor",
-                "variableName": "cursor"
-              }
-            ],
+            "args": null,
             "kind": "FragmentSpread",
             "name": "ItemCreationListComponent_item"
           }
@@ -143,9 +148,11 @@ return {
           {
             "kind": "InlineFragment",
             "selections": [
+              (v4/*: any*/),
+              (v5/*: any*/),
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v6/*: any*/),
                 "concreteType": "ItemCombinationConnection",
                 "kind": "LinkedField",
                 "name": "creates",
@@ -174,7 +181,7 @@ return {
                             "kind": "LinkedField",
                             "name": "source",
                             "plural": false,
-                            "selections": (v5/*: any*/),
+                            "selections": (v7/*: any*/),
                             "storageKey": null
                           },
                           {
@@ -184,7 +191,7 @@ return {
                             "kind": "LinkedField",
                             "name": "target",
                             "plural": false,
-                            "selections": (v5/*: any*/),
+                            "selections": (v7/*: any*/),
                             "storageKey": null
                           },
                           (v2/*: any*/)
@@ -231,7 +238,7 @@ return {
               },
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v6/*: any*/),
                 "filters": null,
                 "handle": "connection",
                 "key": "ItemCreationList_item_creates",
@@ -248,16 +255,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "da81f01b5e7baef6d00331a2b0cda139",
+    "cacheID": "336ff2ecc90bf77034e0fbf7af2f6f7b",
     "id": null,
     "metadata": {},
     "name": "ItemCreationListPaginationQuery",
     "operationKind": "query",
-    "text": "query ItemCreationListPaginationQuery(\n  $count: Int = 3\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...ItemCreationListComponent_item_1G22uz\n    id\n  }\n}\n\nfragment ItemCreationListComponent_item_1G22uz on Item {\n  creates(after: $cursor, first: $count) {\n    edges {\n      node {\n        source {\n          id\n          name\n        }\n        target {\n          id\n          name\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query ItemCreationListPaginationQuery(\n  $count: Int\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...ItemCreationListComponent_item\n    id\n  }\n}\n\nfragment ItemCreationCardComponent_itemCombination on ItemCombination {\n  source {\n    id\n    name\n    imageUrl\n    myths\n  }\n  target {\n    id\n    name\n    imageUrl\n    myths\n  }\n}\n\nfragment ItemCreationListComponent_item on Item {\n  name\n  imageUrl\n  creates(after: $cursor, first: $count) {\n    edges {\n      node {\n        ...ItemCreationCardComponent_itemCombination\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8bedf4071be3ea3ee525049fc26c8d0e";
+(node as any).hash = "3e5dc7cf1aea94f4708b4109e655100b";
 
 export default node;
