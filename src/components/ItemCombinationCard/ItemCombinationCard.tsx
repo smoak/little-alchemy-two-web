@@ -2,6 +2,7 @@ import graphql from 'babel-plugin-relay/macro';
 import { Box, Card } from 'grommet';
 import { FC } from 'react';
 import { useFragment } from 'react-relay';
+import { itemDisplayName } from '../../data/item';
 import { ItemImage } from '../ItemImage/ItemImage';
 import { ItemLink } from '../ItemLink/ItemLink';
 import { ItemCombinationCardComponent_itemCombination$key } from './__generated__/ItemCombinationCardComponent_itemCombination.graphql';
@@ -29,6 +30,8 @@ type ItemCombinationCardProps = {
 
 export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombination }) => {
   const { source, target } = useFragment(fragment, itemCombination);
+  const sourceName = itemDisplayName(source.name);
+  const targetName = itemDisplayName(target.name);
 
   return (
     <Card background="white" pad="small" width="medium">
@@ -37,7 +40,7 @@ export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombinat
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={source.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={source.name}>{source.name}</ItemLink>
+              <ItemLink itemName={source.name}>{sourceName}</ItemLink>
             </Box>
           </Box>
         </Box>
@@ -45,7 +48,7 @@ export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombinat
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={target.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={target.name}>{target.name}</ItemLink>
+              <ItemLink itemName={target.name}>{targetName}</ItemLink>
             </Box>
           </Box>
         </Box>

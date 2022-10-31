@@ -28,7 +28,7 @@ interface ItemProps {
 
 export const Item: FC<ItemProps> = ({ itemName }) => {
   const { name } = useItemParams();
-  const { item } = useLazyLoadQuery<ItemQuery>(query, { name: itemName ?? name, count: 3 });
+  const { item } = useLazyLoadQuery<ItemQuery>(query, { name: itemName ?? name, count: 6 });
 
   if (!item) {
     return <>No item found</>;

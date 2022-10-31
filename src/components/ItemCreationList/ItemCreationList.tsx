@@ -5,6 +5,7 @@ import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
 import { ItemCreationCard } from '../ItemCreationCard/ItemCreationCard';
+import { ItemCreationGlimmerCard } from '../ItemCreationCard/ItemCreationGlimmerCard';
 
 import { ItemCreationListComponent_item$key } from './__generated__/ItemCreationListComponent_item.graphql';
 import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationListPaginationQuery.graphql';
@@ -43,16 +44,13 @@ export const ItemCreationList: FC<ItemCreationListProps> = ({ item }) => {
     return <Box pad="medium">This item does not create anything</Box>;
   }
 
-  if (isLoadingNext) {
-    return <>Loading...</>;
-  }
-
   return (
     <>
       <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
         {items.map((i, index) => (
           <ItemCreationCard key={index} itemCombination={i.node} itemImageUrl={data.imageUrl} itemName={data.name} />
         ))}
+        {isLoadingNext && <ItemCreationGlimmerCard />}
       </Grid>
       {hasNext && (
         <Box direction="row" align="center" pad="medium" gap="medium">

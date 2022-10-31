@@ -5,6 +5,7 @@ import { usePaginationFragment } from 'react-relay/hooks';
 
 import { notEmpty } from '../../data/array';
 import { ItemCombinationCard } from '../ItemCombinationCard/ItemCombinationCard';
+import { ItemCombinationGlimmerCard } from '../ItemCombinationCard/ItemCombinationGlimmerCard';
 
 import { ItemCombinationListComponent_item$key } from './__generated__/ItemCombinationListComponent_item.graphql';
 import { ItemCombinationListPaginationQuery } from './__generated__/ItemCombinationListPaginationQuery.graphql';
@@ -42,16 +43,13 @@ export const ItemCombinationList: FC<ItemCombinationListProps> = ({ item }) => {
     return <div>No combinations</div>;
   }
 
-  if (isLoadingNext) {
-    return <>Loading...</>;
-  }
-
   return (
     <>
       <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
         {items.map((i, index) => (
           <ItemCombinationCard key={index} itemCombination={i.node} />
         ))}
+        {isLoadingNext && <ItemCombinationGlimmerCard />}
       </Grid>
       {hasNext && (
         <Box direction="row" align="center" pad="medium" gap="medium">

@@ -1,6 +1,7 @@
 import { Grommet } from 'grommet';
 import React, { FC, Suspense } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { Router } from '../Router/Router';
 
