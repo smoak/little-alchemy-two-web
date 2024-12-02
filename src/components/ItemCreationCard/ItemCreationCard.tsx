@@ -1,39 +1,30 @@
-import graphql from 'babel-plugin-relay/macro';
 import { Box, Card, Text } from 'grommet';
-import { FC } from 'react';
-import { useFragment } from 'react-relay';
-import { itemDisplayName } from '../../data/item';
 import { ItemImage } from '../ItemImage/ItemImage';
 import { ItemLink } from '../ItemLink/ItemLink';
-import { ItemCreationCardComponent_itemCombination$key } from './__generated__/ItemCreationCardComponent_itemCombination.graphql';
-
-const fragment = graphql`
-  fragment ItemCreationCardComponent_itemCombination on ItemCombination {
-    source {
-      id
-      name
-      imageUrl
-      myths
-    }
-    target {
-      id
-      name
-      imageUrl
-      myths
-    }
-  }
-`;
+import { useAsync } from 'react-use';
+import { findById } from '../../data/repos/item';
+import { ItemCreationGlimmerCard } from './ItemCreationGlimmerCard';
 
 type ItemCreationCardProps = {
-  readonly itemCombination: ItemCreationCardComponent_itemCombination$key;
-  readonly itemImageUrl: string;
   readonly itemName: string;
+  readonly itemImageUrl: string;
+  readonly targetName: string;
+  readonly sourceName: string;
 };
 
-export const ItemCreationCard: FC<ItemCreationCardProps> = ({ itemCombination, itemImageUrl, itemName }) => {
-  const { source, target } = useFragment(fragment, itemCombination);
-  const sourceName = itemDisplayName(source.name);
-  const targetName = itemDisplayName(target.name);
+export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetName }: ItemCreationCardProps) => {
+  const state = useAsync(async () => {
+    const source = await findById(sourceName);
+    const target = await findById(targetName);
+
+    return { source, target };
+  }, [sourceName, targetName]);
+
+  if (state.loading || !state.value) {
+    return <ItemCreationGlimmerCard />;
+  }
+
+  const { source, target } = state.value;
 
   return (
     <Card background="white" pad="xsmall" height="small" width="large">
@@ -42,7 +33,7 @@ export const ItemCreationCard: FC<ItemCreationCardProps> = ({ itemCombination, i
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={source.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={source.name}>{sourceName}</ItemLink>
+              <ItemLink itemName={sourceName}>{sourceName}</ItemLink>
             </Box>
           </Box>
         </Box>
@@ -55,7 +46,7 @@ export const ItemCreationCard: FC<ItemCreationCardProps> = ({ itemCombination, i
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={itemImageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={itemName}>{itemDisplayName(itemName)}</ItemLink>
+              <ItemLink itemName={itemName}>{itemName}</ItemLink>
             </Box>
           </Box>
         </Box>
@@ -67,7 +58,7 @@ export const ItemCreationCard: FC<ItemCreationCardProps> = ({ itemCombination, i
           </Box>
           <ItemImage imageUrl={target.imageUrl} />
           <Box pad="xsmall">
-            <ItemLink itemName={target.name}>{targetName}</ItemLink>
+            <ItemLink itemName={targetName}>{targetName}</ItemLink>
           </Box>
         </Box>
       </Box>

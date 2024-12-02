@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`item .findAll when there are items returns the expected result 1`] = `
+[
+  {
+    "combinations": [
+      {
+        "source": "item1",
+        "target": "item2",
+      },
+    ],
+    "creates": [
+      {
+        "source": "item1",
+        "target": "item2",
+      },
+    ],
+    "imageUrl": "https://picsum.photos/48",
+    "myths": false,
+    "name": "item",
+  },
+]
+`;
+
+exports[`item .findById when the item can be found returns the expected result 1`] = `
+{
+  "combinations": [
+    {
+      "source": "item1",
+      "target": "item2",
+    },
+  ],
+  "creates": [
+    {
+      "source": "item1",
+      "target": "item2",
+    },
+  ],
+  "imageUrl": "https://picsum.photos/48",
+  "myths": false,
+  "name": "item",
+}
+`;
+
+exports[`item .findById when the item cannot be found throws an error 1`] = `"Could not find item with id: foo"`;
+
+exports[`item .search when the query doesnt match anything returns the expected result 1`] = `[]`;
+
+exports[`item .search when the query matches returns the expected result 1`] = `
+[
+  {
+    "combinations": [
+      {
+        "source": "item1",
+        "target": "item2",
+      },
+    ],
+    "creates": [
+      {
+        "source": "item1",
+        "target": "item2",
+      },
+    ],
+    "imageUrl": "https://picsum.photos/48",
+    "myths": false,
+    "name": "item1",
+  },
+]
+`;

@@ -1,62 +1,27 @@
-import graphql from 'babel-plugin-relay/macro';
-import { Box, Button, Grid } from 'grommet';
-import { FC } from 'react';
-import { usePaginationFragment } from 'react-relay/hooks';
-
-import { notEmpty } from '../../data/array';
+import { Box, Grid } from 'grommet';
 import { ItemCreationCard } from '../ItemCreationCard/ItemCreationCard';
-import { ItemCreationGlimmerCard } from '../ItemCreationCard/ItemCreationGlimmerCard';
+import { Item } from '../../data/types';
 
-import { ItemCreationListComponent_item$key } from './__generated__/ItemCreationListComponent_item.graphql';
-import { ItemCreationListPaginationQuery } from './__generated__/ItemCreationListPaginationQuery.graphql';
+type ItemCreationListProps = {
+  readonly item: Item;
+};
 
-const fragment = graphql`
-  fragment ItemCreationListComponent_item on Item @refetchable(queryName: "ItemCreationListPaginationQuery") {
-    name
-    imageUrl
-    creates(after: $cursor, first: $count) @connection(key: "ItemCreationList_item_creates") {
-      edges {
-        node {
-          ...ItemCreationCardComponent_itemCombination
-        }
-      }
-    }
-  }
-`;
-
-interface ItemCreationListProps {
-  readonly item: ItemCreationListComponent_item$key;
-}
-
-export const ItemCreationList: FC<ItemCreationListProps> = ({ item }) => {
-  const { data, loadNext, isLoadingNext, hasNext } = usePaginationFragment<
-    ItemCreationListPaginationQuery,
-    ItemCreationListComponent_item$key
-  >(fragment, item);
-  const onMore = () => {
-    loadNext(10);
-  };
-
-  const edges = data.creates.edges;
-  const items = edges?.filter(notEmpty);
-
-  if (!items || items.length === 0) {
+export const ItemCreationList = ({ item }: ItemCreationListProps) => {
+  if (item.creates.length === 0) {
     return <Box pad="medium">This item does not create anything</Box>;
   }
 
   return (
-    <>
-      <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
-        {items.map((i, index) => (
-          <ItemCreationCard key={index} itemCombination={i.node} itemImageUrl={data.imageUrl} itemName={data.name} />
-        ))}
-        {isLoadingNext && <ItemCreationGlimmerCard />}
-      </Grid>
-      {hasNext && (
-        <Box direction="row" align="center" pad="medium" gap="medium">
-          <Button primary onClick={onMore} label="load more" />
-        </Box>
-      )}
-    </>
+    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+      {item.creates.map((i) => (
+        <ItemCreationCard
+          key={[i.source, i.target].join(':')}
+          itemImageUrl={item.imageUrl}
+          itemName={item.name}
+          sourceName={i.source}
+          targetName={i.target}
+        />
+      ))}
+    </Grid>
   );
 };

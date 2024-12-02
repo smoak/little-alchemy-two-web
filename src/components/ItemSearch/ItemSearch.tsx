@@ -1,47 +1,9 @@
-import graphql from 'babel-plugin-relay/macro';
 import { Box, Spinner, TextInput } from 'grommet';
 import { Search } from 'grommet-icons';
-import React, { FC, useRef, useState, useTransition } from 'react';
-import { useLazyLoadQuery, useRefetchableFragment } from 'react-relay/hooks';
+import React, { useRef, useState, useTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { notEmpty } from '../../data/array';
-
-import { ItemSearchQuery } from './__generated__/ItemSearchQuery.graphql';
-import { ItemSearchRefetchQuery } from './__generated__/ItemSearchRefetchQuery.graphql';
-import { ItemSearch_search$key, ItemSearch_search$data } from './__generated__/ItemSearch_search.graphql';
-
-const fragment = graphql`
-  fragment ItemSearch_search on Query @refetchable(queryName: "ItemSearchRefetchQuery") {
-    search(query: $query) {
-      ... on ItemSearchResults {
-        items(first: 5) {
-          edges {
-            node {
-              id
-              name
-              myths
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-const query = graphql`
-  query ItemSearchQuery($query: String!) {
-    ...ItemSearch_search
-  }
-`;
-
-const getSuggestions = (data: ItemSearch_search$data, query: string) => {
-  if (!data.search.items || !data.search.items.edges || query === '') {
-    return [];
-  }
-
-  return data.search.items.edges.filter(notEmpty).map((e) => e.node.name);
-};
+import { search } from '../../data/repos/item';
+import { useAsyncFn } from 'react-use';
 
 const spinnerItem = [
   {
@@ -53,29 +15,30 @@ const spinnerItem = [
   },
 ];
 
-export const ItemSearch: FC = () => {
+export const ItemSearch = () => {
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [state, newSearch] = useAsyncFn(async (query: string) => {
+    const items = await search(query);
+    setSuggestions(items.map((i) => i.name));
+  });
   const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
   const [value, setValue] = useState('');
-  const [areSuggestionsShowing, setAreSuggestionsShowing] = useState(false);
+  const areSuggestionsShowing = state.value != null;
   const boxRef = useRef<HTMLDivElement>(null);
-  const response = useLazyLoadQuery<ItemSearchQuery>(query, { query: '' });
-  const [data, refetch] = useRefetchableFragment<ItemSearchRefetchQuery, ItemSearch_search$key>(fragment, response);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target: { value: newValue } }) => {
     setValue(newValue);
     if (newValue.trim()) {
       startTransition(() => {
-        refetch({ query: newValue });
+        newSearch(newValue);
       });
+    } else {
+      setSuggestions([]);
     }
   };
   const onSuggestionSelect = ({ suggestion }: { suggestion: string }) => {
     navigate(`/item/${suggestion}`);
   };
-  const onSuggestionsClose = () => {
-    setAreSuggestionsShowing(false);
-  };
-  const items = getSuggestions(data, value);
 
   return (
     <Box
@@ -98,9 +61,8 @@ export const ItemSearch: FC = () => {
         plain
         placeholder="Search for an item"
         value={value}
-        suggestions={isPending ? spinnerItem : items}
+        suggestions={isPending ? spinnerItem : suggestions}
         onChange={onChange}
-        onSuggestionsClose={onSuggestionsClose}
         onSuggestionSelect={onSuggestionSelect}
       />
     </Box>

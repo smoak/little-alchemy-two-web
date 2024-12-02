@@ -1,9 +1,9 @@
 import { Box } from 'grommet';
-import React, { FC, Suspense } from 'react';
+import { Suspense } from 'react';
 
 import { ItemSearch } from '../ItemSearch/ItemSearch';
 
-export const Home: FC = () => (
+export const Home = () => (
   <Box fill align="center" pad={{ top: 'large' }}>
     <Suspense fallback="Loading...">
       <ItemSearch />

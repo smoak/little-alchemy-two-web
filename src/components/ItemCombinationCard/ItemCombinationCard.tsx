@@ -1,37 +1,28 @@
-import graphql from 'babel-plugin-relay/macro';
 import { Box, Card } from 'grommet';
-import { FC } from 'react';
-import { useFragment } from 'react-relay';
-import { itemDisplayName } from '../../data/item';
 import { ItemImage } from '../ItemImage/ItemImage';
 import { ItemLink } from '../ItemLink/ItemLink';
-import { ItemCombinationCardComponent_itemCombination$key } from './__generated__/ItemCombinationCardComponent_itemCombination.graphql';
-
-const fragment = graphql`
-  fragment ItemCombinationCardComponent_itemCombination on ItemCombination {
-    source {
-      id
-      name
-      imageUrl
-      myths
-    }
-    target {
-      id
-      name
-      imageUrl
-      myths
-    }
-  }
-`;
+import { useAsync } from 'react-use';
+import { findById } from '../../data/repos/item';
+import { ItemCombinationGlimmerCard } from './ItemCombinationGlimmerCard';
 
 type ItemCombinationCardProps = {
-  readonly itemCombination: ItemCombinationCardComponent_itemCombination$key;
+  readonly sourceName: string;
+  readonly targetName: string;
 };
 
-export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombination }) => {
-  const { source, target } = useFragment(fragment, itemCombination);
-  const sourceName = itemDisplayName(source.name);
-  const targetName = itemDisplayName(target.name);
+export const ItemCombinationCard = ({ sourceName, targetName }: ItemCombinationCardProps) => {
+  const state = useAsync(async () => {
+    const source = await findById(sourceName);
+    const target = await findById(targetName);
+
+    return { source, target };
+  }, [sourceName, targetName]);
+
+  if (state.loading || !state.value) {
+    return <ItemCombinationGlimmerCard />;
+  }
+
+  const { source, target } = state.value;
 
   return (
     <Card background="white" pad="small" width="medium">
@@ -40,7 +31,7 @@ export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombinat
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={source.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={source.name}>{sourceName}</ItemLink>
+              <ItemLink itemName={sourceName}>{sourceName}</ItemLink>
             </Box>
           </Box>
         </Box>
@@ -48,7 +39,7 @@ export const ItemCombinationCard: FC<ItemCombinationCardProps> = ({ itemCombinat
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={target.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={target.name}>{targetName}</ItemLink>
+              <ItemLink itemName={targetName}>{targetName}</ItemLink>
             </Box>
           </Box>
         </Box>

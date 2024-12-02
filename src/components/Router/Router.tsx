@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { PageHome } from '../PageHome/PageHome';
 import { PageItem } from '../PageItem/PageItem';
 
-export const Router: FC = () => (
+export const Router = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<PageHome />} />

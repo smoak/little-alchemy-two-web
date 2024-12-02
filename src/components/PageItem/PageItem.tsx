@@ -1,9 +1,9 @@
 import { Box, Page, PageContent } from 'grommet';
-import { FC, Suspense } from 'react';
+import { Suspense } from 'react';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { Item } from '../Item/Item';
 
-export const PageItem: FC = () => {
+export const PageItem = () => {
   return (
     <>
       <AppHeader />

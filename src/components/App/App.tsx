@@ -1,19 +1,15 @@
 import { Grommet } from 'grommet';
-import React, { FC, Suspense } from 'react';
-import { RelayEnvironmentProvider } from 'react-relay/hooks';
+import { Suspense } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { Router } from '../Router/Router';
 
-import environment from './relay';
 import { theme } from './theme';
 
-export const App: FC = () => (
+export const App = () => (
   <Grommet theme={theme} full>
-    <RelayEnvironmentProvider environment={environment}>
-      <Suspense fallback="Loading...">
-        <Router />
-      </Suspense>
-    </RelayEnvironmentProvider>
+    <Suspense fallback="Loading...">
+      <Router />
+    </Suspense>
   </Grommet>
 );
