@@ -16,7 +16,7 @@ export const AppHeader = () => {
     <Header background="brand" pad="small">
       <Button icon={<Home />} hoverIndicator onClick={homeButtonClickCallback} />
       <Box fill align="center" justify="start">
-        <Heading level="3" margin="none">
+        <Heading level="3" margin="none" color="white">
           {headingText}
         </Heading>
       </Box>

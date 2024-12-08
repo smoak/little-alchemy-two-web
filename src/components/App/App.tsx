@@ -7,7 +7,7 @@ import { Router } from '../Router/Router';
 import { theme } from './theme';
 
 export const App = () => (
-  <Grommet theme={theme} full="min">
+  <Grommet theme={theme} full="min" background="light-3">
     <Suspense fallback="Loading...">
       <Router />
     </Suspense>

@@ -56,6 +56,7 @@ export const ItemSearch = () => {
 
   return (
     <Box
+      background="white"
       ref={boxRef}
       width="large"
       direction="row"

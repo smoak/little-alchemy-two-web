@@ -8,7 +8,7 @@ export const ItemImage = ({ imageUrl }: ItemImageProps) => {
   return (
     <Box height="xxsmall" width="xxsmall" background="image-bg" round="xsmall">
       <Box pad="xxsmall">
-        <Image fit="cover" src={imageUrl} />
+        <Image fit="cover" src={imageUrl} alt="" />
       </Box>
     </Box>
   );
