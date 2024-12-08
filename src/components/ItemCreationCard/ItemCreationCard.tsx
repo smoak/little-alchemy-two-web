@@ -33,7 +33,7 @@ export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetNam
           <Box align="center" height="small" width="small">
             <ItemImage imageUrl={source.imageUrl} />
             <Box pad="xsmall">
-              <ItemLink itemName={sourceName}>{sourceName}</ItemLink>
+              <ItemLink itemName={sourceName}>{source.displayName}</ItemLink>
             </Box>
           </Box>
         </Box>
@@ -58,7 +58,7 @@ export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetNam
           </Box>
           <ItemImage imageUrl={target.imageUrl} />
           <Box pad="xsmall">
-            <ItemLink itemName={targetName}>{targetName}</ItemLink>
+            <ItemLink itemName={targetName}>{target.displayName}</ItemLink>
           </Box>
         </Box>
       </Box>

@@ -1,6 +1,7 @@
 import { Box, Button, Header, Heading } from 'grommet';
 import { Home } from 'grommet-icons';
 import { useNavigate, useParams } from 'react-router-dom';
+import { displayNameFor } from '../../data/item-fns';
 
 export const AppHeader = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export const AppHeader = () => {
     navigate('/');
   };
 
-  const headingText = name ?? 'Little Alchemy 2';
+  const headingText = name != null ? displayNameFor(name) : 'Little Alchemy 2';
 
   return (
     <Header background="brand" pad="small">

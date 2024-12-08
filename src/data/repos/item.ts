@@ -2,6 +2,7 @@ import Fuse, { IFuseOptions } from 'fuse.js';
 
 import { DatabaseItem, getItemByName, getItemNames, getItems } from '../fetchers/item';
 import type { Item, ItemCombination } from '../types';
+import { displayNameFor } from '../item-fns';
 
 const fromCombinations = (combinations: DatabaseItem['combinations']): ItemCombination[] =>
   combinations.map((combo) => ({ source: combo[0], target: combo[1] }));
@@ -12,6 +13,7 @@ const fromItemWithName = (name: string, item: DatabaseItem): Item => ({
   myths: item.myths,
   creates: item.makes,
   combinations: fromCombinations(item.combinations),
+  displayName: displayNameFor(name),
 });
 
 type FindById = (id: string) => Promise<Item>;

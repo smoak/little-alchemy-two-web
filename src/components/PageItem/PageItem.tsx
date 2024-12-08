@@ -5,17 +5,15 @@ import { Item } from '../Item/Item';
 
 export const PageItem = () => {
   return (
-    <>
+    <Box fill>
       <AppHeader />
-      <Box background="light-3" flex>
-        <Page background="light-3" kind="wide">
-          <PageContent pad="medium">
-            <Suspense fallback="Loading...">
-              <Item />
-            </Suspense>
-          </PageContent>
-        </Page>
-      </Box>
-    </>
+      <Page background="light-3" kind="wide" flex direction="column" fill align="center" height="100%">
+        <PageContent pad="medium">
+          <Suspense fallback="Loading...">
+            <Item />
+          </Suspense>
+        </PageContent>
+      </Page>
+    </Box>
   );
 };

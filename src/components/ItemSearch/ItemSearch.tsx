@@ -1,9 +1,10 @@
-import { Box, Spinner, TextInput } from 'grommet';
+import { Box, Spinner, TextInput, TextInputProps } from 'grommet';
 import { Search } from 'grommet-icons';
 import React, { useRef, useState, useTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { search } from '../../data/repos/item';
 import { useAsyncFn } from 'react-use';
+import { Item } from '../../data/types';
 
 const spinnerItem = [
   {
@@ -15,11 +16,24 @@ const spinnerItem = [
   },
 ];
 
+type SuggestedItemProps = {
+  readonly item: Item;
+};
+const SuggestedItem = ({ item }: SuggestedItemProps) => {
+  return (
+    <Box direction="row" align="center" gap="small" pad="small">
+      {item.displayName}
+    </Box>
+  );
+};
+
+type Suggestions = TextInputProps['suggestions'];
+
 export const ItemSearch = () => {
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<Suggestions>([]);
   const [state, newSearch] = useAsyncFn(async (query: string) => {
     const items = await search(query);
-    setSuggestions(items.map((i) => i.name));
+    setSuggestions(items.map((i) => ({ label: <SuggestedItem item={i} />, value: i.name })));
   });
   const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
@@ -36,8 +50,8 @@ export const ItemSearch = () => {
       setSuggestions([]);
     }
   };
-  const onSuggestionSelect = ({ suggestion }: { suggestion: string }) => {
-    navigate(`/item/${suggestion}`);
+  const onSuggestionSelect = ({ suggestion }: { suggestion: { value: string } }) => {
+    navigate(`/item/${suggestion.value}`);
   };
 
   return (

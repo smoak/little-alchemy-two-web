@@ -4,6 +4,7 @@ export type Item = {
   readonly creates: ItemCombination[];
   readonly combinations: ItemCombination[];
   readonly imageUrl: string;
+  readonly displayName: string;
 };
 
 export type ItemCombination = {

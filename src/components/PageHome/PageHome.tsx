@@ -6,7 +6,7 @@ export const PageHome = () => {
   return (
     <>
       <AppHeader />
-      <Box fill>
+      <Box fill background="light-3">
         <Page kind="wide">
           <PageContent pad="medium">
             <Home />

@@ -12,7 +12,7 @@ export const ItemCombinationList = ({ item }: ItemCombinationListProps) => {
   }
 
   return (
-    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small" alignSelf="center">
       {item.combinations.map((i) => (
         <ItemCombinationCard key={[i.source, i.target].join(':')} sourceName={i.source} targetName={i.target} />
       ))}

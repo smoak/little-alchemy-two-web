@@ -12,12 +12,12 @@ export const ItemCreationList = ({ item }: ItemCreationListProps) => {
   }
 
   return (
-    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
+    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small" alignSelf="center">
       {item.creates.map((i) => (
         <ItemCreationCard
           key={[i.source, i.target].join(':')}
           itemImageUrl={item.imageUrl}
-          itemName={item.name}
+          itemName={item.displayName}
           sourceName={i.source}
           targetName={i.target}
         />
