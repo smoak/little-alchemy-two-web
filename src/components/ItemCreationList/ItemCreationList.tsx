@@ -12,7 +12,7 @@ export const ItemCreationList = ({ item }: ItemCreationListProps) => {
   }
 
   return (
-    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small" alignSelf="center">
+    <Grid rows="small" columns={{ count: 'fit', size: 'medium' }} gap="small">
       {item.creates.map((i) => (
         <ItemCreationCard
           key={[i.source, i.target].join(':')}
