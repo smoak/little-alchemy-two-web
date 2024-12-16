@@ -1279,7 +1279,7 @@
         },
         {
           "source": "giant",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "ocean",
@@ -6468,7 +6468,7 @@
         },
         {
           "source": "giant",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "glasses",
@@ -13719,7 +13719,7 @@
       "makes": [
         {
           "source": "arctic",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "axe",
@@ -13739,7 +13739,7 @@
         },
         {
           "source": "cold",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "cow",
@@ -13759,7 +13759,7 @@
         },
         {
           "source": "ice",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "livestock",
@@ -13799,7 +13799,7 @@
         },
         {
           "source": "snow",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "turtle",
@@ -17738,7 +17738,7 @@
         },
         {
           "source": "giant",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "heat",
@@ -18338,7 +18338,7 @@
       ],
       "image_url": "https://hints.littlealchemy2.com/icons/1_44.svg"
     },
-    "jotunn": {
+    "jötunn": {
       "myths": true,
       "combinations": [
         ["arctic", "giant"],
@@ -30766,7 +30766,7 @@
         },
         {
           "source": "giant",
-          "target": "joetunn"
+          "target": "jötunn"
         },
         {
           "source": "glass",
