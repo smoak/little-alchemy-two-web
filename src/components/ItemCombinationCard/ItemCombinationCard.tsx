@@ -29,7 +29,7 @@ export const ItemCombinationCard = ({ sourceName, targetName }: ItemCombinationC
       <Box direction="row" pad="medium">
         <Box pad="small">
           <Box align="center" height="small" width="small">
-            <ItemImage imageUrl={source.imageUrl} />
+            <ItemImage imageUrl={source.imageUrl} myths={source.myths} />
             <Box pad="xsmall">
               <ItemLink itemName={sourceName}>{source.displayName}</ItemLink>
             </Box>
@@ -37,7 +37,7 @@ export const ItemCombinationCard = ({ sourceName, targetName }: ItemCombinationC
         </Box>
         <Box pad="small">
           <Box align="center" height="small" width="small">
-            <ItemImage imageUrl={target.imageUrl} />
+            <ItemImage imageUrl={target.imageUrl} myths={target.myths} />
             <Box pad="xsmall">
               <ItemLink itemName={targetName}>{target.displayName}</ItemLink>
             </Box>

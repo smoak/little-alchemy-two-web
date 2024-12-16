@@ -8,17 +8,28 @@ import { ItemCreationGlimmerCard } from './ItemCreationGlimmerCard';
 type ItemCreationCardProps = {
   readonly itemName: string;
   readonly itemImageUrl: string;
+  readonly itemMyths: boolean;
   readonly targetName: string;
   readonly sourceName: string;
 };
 
-export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetName }: ItemCreationCardProps) => {
+export const ItemCreationCard = ({
+  itemImageUrl,
+  itemMyths,
+  itemName,
+  sourceName,
+  targetName,
+}: ItemCreationCardProps) => {
   const state = useAsync(async () => {
     const source = await findById(sourceName);
     const target = await findById(targetName);
 
     return { source, target };
   }, [sourceName, targetName]);
+
+  if (state.error != null) {
+    return <div>oops {state.error.message}</div>;
+  }
 
   if (state.loading || !state.value) {
     return <ItemCreationGlimmerCard />;
@@ -27,11 +38,11 @@ export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetNam
   const { source, target } = state.value;
 
   return (
-    <Card background="white" pad="xsmall" height="small" width="large">
+    <Card background="white" pad="small" height="small" width="large">
       <Box direction="row" pad="xsmall">
         <Box pad="small">
           <Box align="center" height="small" width="small">
-            <ItemImage imageUrl={source.imageUrl} />
+            <ItemImage imageUrl={source.imageUrl} myths={source.myths} />
             <Box pad="xsmall">
               <ItemLink itemName={sourceName}>{source.displayName}</ItemLink>
             </Box>
@@ -44,7 +55,7 @@ export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetNam
         </Box>
         <Box pad="small">
           <Box align="center" height="small" width="small">
-            <ItemImage imageUrl={itemImageUrl} />
+            <ItemImage imageUrl={itemImageUrl} myths={itemMyths} />
             <Box pad="xsmall">
               <ItemLink itemName={itemName}>{itemName}</ItemLink>
             </Box>
@@ -56,7 +67,7 @@ export const ItemCreationCard = ({ itemImageUrl, itemName, sourceName, targetNam
           <Box pad="xsmall">
             <Text size="xlarge">=</Text>
           </Box>
-          <ItemImage imageUrl={target.imageUrl} />
+          <ItemImage imageUrl={target.imageUrl} myths={target.myths} />
           <Box pad="xsmall">
             <ItemLink itemName={targetName}>{target.displayName}</ItemLink>
           </Box>

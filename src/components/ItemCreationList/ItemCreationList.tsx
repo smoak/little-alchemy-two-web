@@ -20,6 +20,7 @@ export const ItemCreationList = ({ item }: ItemCreationListProps) => {
           itemName={item.displayName}
           sourceName={i.source}
           targetName={i.target}
+          itemMyths={item.myths}
         />
       ))}
     </Grid>
