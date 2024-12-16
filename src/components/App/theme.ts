@@ -7,7 +7,7 @@ export const theme: ThemeType = {
       brand: '#1c76c4',
       'off-white': '#FFFFF0',
       focus: '#187ba1',
-      'image-bg': '#c9f0ff'
+      'image-bg': '#c9f0ff',
     },
     font: {
       family: 'Roboto',
